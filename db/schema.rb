@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_084035) do
 
   create_table "genres", force: :cascade do |t|
     t.string "genre_name"
-    t.boolean "genre_status"
+    t.boolean "genre_status", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_084035) do
     t.integer "order_id"
     t.integer "order_price"
     t.integer "quantity"
-    t.integer "make_status"
+    t.integer "make_status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -83,10 +83,10 @@ ActiveRecord::Schema.define(version: 2020_09_15_084035) do
     t.string "addressee"
     t.string "zipcode"
     t.string "send_to_address"
-    t.integer "freight"
+    t.integer "freight", default: 800
     t.integer "total_price"
-    t.integer "how_to_pay"
-    t.integer "order_status"
+    t.integer "how_to_pay", default: 0
+    t.integer "order_status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
