@@ -2,16 +2,16 @@ Rails.application.routes.draw do
    devise_for :customers
 
    devise_for :admins, controllers: {
-    sessions:      'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
+    sessions:      'admins/devise/sessions',
+    passwords:     'admins/devise/passwords',
+    registrations: 'admins/devise/registrations'
   }
  #↑controllersでカスタマー側とURLを分けてます。
 
  # customer側ルーティング
   root "products#top"
   get "products/about" => "products#about", as: 'products_about'
-  get "customers/usubscribe" => "customers#usubscribe", as: 'customers_usubscribe'
+  patch "customers/usubscribe" => "customers#usubscribe", as: 'customers_usubscribe'
   get "customers/withdraw" => "customers#withdraw", as: 'customers_withdraw'
   resources :products, only: [:index, :show]
   resources :customers, only: [:edit ,:update, :show]
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   # admin側ルーティング
   namespace :admins do
     root "devise#new"
-    get "admins" => "admins/home", as: 'admins_home'
+    get "top" => "home#top", as: 'admins_home'
     resources :products, only: [:new, :show, :index, :create, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :order_dateils, only: [:update]
