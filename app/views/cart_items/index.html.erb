@@ -1,2 +1,41 @@
 <h1>CartItems#index</h1>
 <p>Find me in app/views/cart_items/index.html.erb</p>
+<div class="container">
+	<div class="row">
+	    <div class="col-lg-12">
+		    <h3 class="title" style="float:left;">ショッピングカート</h3>
+		    <div class="text-right title">
+		        <%= link_to "カートを空にする", class: "btn btn-danger", data: {confirm: 'カートを空にしてよろしいですか？'} %>
+		    </div>
+	        <table class="table table-bordered col-lg-12">
+	            <tr class="thead-light">
+	            	<th style="width:40%">商品名</th>
+	            	<th style="width:15%">単価（税込）</th>
+	            	<th style="width:15%">数量</th>
+	            	<th style="width:15%">小計</th>
+	            	<th style="width:15%"></th>
+	            </tr>
+	            <tr>
+	            	<td>商品画像/商品名</td>
+	            	<td>税込単価</td>
+	            	<td class="text-center", style="vertical-align: middle;">
+	                	<%= text_field :count , style: "width:30%"%>
+	                	<%=link_to "変更", class: "btn btn-primary", style: "margin-left:15%" %>
+	            	</td>
+	            	<td>小計</td>
+	            	<td><%= link_to "削除する", class: "btn btn-danger"%></td>
+	          	</tr>
+	        </table>
+	        <table class="table table-bordered col-lg-4 float-right">
+	        	<tr class="thead-light">
+	          		<th style="width:50%">合計金額</th>
+	          		<td style="width:50%"></td>
+	        	</tr>
+	        </table>
+	        <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %><br><br><br>
+	        <div class="text-center">
+	            <%= link_to "情報入力に進む", class: "btn btn-success"%>
+		    </div>
+	    </div>
+	</div>
+</div>
