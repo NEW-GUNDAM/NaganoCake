@@ -1,2 +1,31 @@
-<h1>Admins::Genres#index</h1>
-<p>Find me in app/views/admins/genres/index.html.erb</p>
+<div class="container">
+  <div class="row">
+  	<div class="col-xs-offset-2">
+	  <div class="col-xs-9">
+		<h4>ジャンル一覧・追加</h4>
+
+		<%= form_for (@genre), url: admins_genres_path do |f| %>
+		  <%= f.label :ジャンル %>
+          <%= f.text_field :genre_name, autofocus: true, autocomplete: "genre_name" %>
+          <%= f.submit "追加" , class: "btn btn-primary" %>
+        <% end %>
+
+      <table class="table genre-index">
+      	<thead>
+      	  <th>ジャンル</th>
+      	  <th>状態</th>
+      	  <th></th>
+		</thead>
+
+		<tbody>
+		  <td></td>
+		  <td></td>
+		  <td>
+		  	<a class="btn btn-primary" href="" role="button">編集する</a>
+		  </td>
+		</tbody>
+		</table>
+	  </div>
+	</div>
+  </div>
+</div>
