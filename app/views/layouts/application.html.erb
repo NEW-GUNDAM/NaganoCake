@@ -10,6 +10,55 @@
   </head>
 
   <body>
+
+    <body>
+      <!-- ロゴクリックでtopへ -->
+    <div>
+      <a href="/">logo</a>
+    </div>
+
+    <!-- ifで分岐or_〇〇ファイル？ -->
+    <!-- ヘッダー -->
+    <header>
+      <h1>adminログイン前ヘッダー ＝ カスタマーログイン前</h1>
+      <nav>
+        <a href="/products/about">お店の説明（about）</a>
+        <a href="/products">商品一覧</a>
+        <a href="/customers/sign_up">新規登録</a>
+        <a href="/customers/sign_in">ログイン</a>
+      </nav>
+    </header>
+
+
+    <header>
+      <h1>adminログイン後ヘッダー</h1>
+      <nav>
+        <a href="/admins/products">商品一覧</a>
+        <a href="/admins/customers">会員一覧</a>
+        <a href="/admins/order_items">全顧客_注文履歴一覧</a>
+        <a href="/admins/genres">ジャンル一覧</a>
+        <a href="/admins/sign_in">ログアウト</a>
+      </nav>
+    </header>
+
+
+
+    <header>
+      <h1>カスタマーログイン後ヘッダー</h1>
+      <h2>ようこそ、xxxさん！　元気でしたか？</h2>
+      <nav>
+        <a href="/customers/my_page">マイページ</a>
+        <a href="/products">商品一覧</a>
+        <a href="/cart_items">カート</a>
+        <a href="/customers/sign_in">ログアウト</a>
+      </nav>
+    </header>
+
+
+
     <%= yield %>
+
+    <!-- フッター -->
+    <footer>©ホワイト企業なGUNDAMチーム</footer>
   </body>
 </html>
