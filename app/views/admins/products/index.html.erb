@@ -2,23 +2,44 @@
 
     <div class = "row">
 
-        <div class = "admins_products_index">
+        <div class = "admins_products_index_main">
         	<h3>商品一覧</h3>
-        	    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true">
-        	    	    <%= link_to '', "admins_products_new" %>
-        	    </span>
-	        	    <table class = "table">
-	        	    	<thead>
-	        	    		<tr>
-	        	    			<th>商品ID</th>
-	        	    			<th>商品名</th>
-	        	    			<th>税抜価格</th>
-	        	    			<th>ジャンル</th>
-	        	    			<th>ステータス</th>
-	        	    		</tr>
-	        	    	</thead>
-	        	    	<tbody></tbody>
-	        	    </table>
+        	    
+        	    	<%= link_to '', admins_products_new_path, class: "glyphicon glyphicon-plus-sign" %>
+        	    
+	        	<table class = "table">
+	        	    <thead>
+	        	    	<tr>
+	        	    		<th>商品ID</th>
+	        	    		<th>商品名</th>
+	        	    		<th>税抜価格</th>
+	        	    		<th>ジャンル</th>
+	        	    		<th>ステータス</th>
+	        	    	</tr>
+	        	    </thead>
+	        	    <tbody>
+	        	    	<%= @products.each do |product| %>
+	        	    	<tr>
+	        	    		<td>
+	        	    			<%= product.id %>
+	        	    		</td>
+	        	    		<td>
+	        	    			<%= link_to product.name,"admins_products_show(product.id)" %>
+	        	    		</td>
+	        	    		<td>
+	        	    			<%= product.price %>
+	        	    		</td>
+	        	    		<td>
+	        	    			<%= product.genre_status %>
+	        	    		</td>
+	        	    		<td>
+	        	    			<%= prpduct.status %>
+	        	    		</td>
+
+	        	    	</tr>
+	        	    	<% end %>
+	        	    </tbody>
+	        	</table>
 	    </div>
 	</div>
 </div>
