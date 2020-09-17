@@ -1,2 +1,46 @@
 <h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2 genre-form">
+			<table>
+				<thead>
+					<tr>
+						<th>ジャンル検索</th>
+					</tr>
+				</thead>
+				genres.each
+					<tbody>
+						<tr>
+							<td>link</td>
+						</tr>
+					</tbody>
+			</table>
+		</div>
+
+		<main class="col-md-10">
+			<div class="row">
+            	<h5>商品一覧(全〇〇件)</h5>
+			</div>
+			<h4>オススメ商品</h4>
+			<div class="row">
+				商品一覧
+			</div>
+			<div class="row">
+				products.each
+				<div class="col-lg-3">
+						<div class="image">
+						</div>
+					<ul style="list-style: none; margin:10px 0; padding: 0;">
+						<li>name</li>
+						<li>price</li>
+					</ul>
+				</div>
+			</div>
+		</main>
+	</div>
+</div>
+<%=link_to "Products#index",products_path%>
+
+<%=link_to "Products#about",products_about_path%>
+
+<%=link_to "customers#withdraw",customers_withdraw_path%>

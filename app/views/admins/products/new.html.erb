@@ -1,2 +1,37 @@
-<h1>Admins::Products#new</h1>
-<p>Find me in app/views/admins/products/new.html.erb</p>
+<div class = "container">
+
+    <div class = "row">
+
+        <div class = "admins_products_new_main">
+        	<h3>商品新規登録</h3>
+        	<%= form_for() do |f| %>
+                <div class= "field row">
+                    <%= f.attachment_field :image_id %>
+                </div>
+        	<h4>商品名</h4>
+        	    <div class= "field row">
+                    <%= f.text_field :name %>
+                </div>
+        	<h4>商品説明</h4>
+                <div class= "field row">
+        	        <%= f.text_area :introduction %>
+                </div>
+        	<h4>ジャンル</h4>
+                <div class= "field row">
+                    <%= f.select :genre_status, [["ケーキ", "ケーキ"],["プリン",　"プリン"],["焼き菓子","焼き菓子"],["キャンディ","キャンディ"]], include_blank: "選択してください" %>
+                </div>
+        	<h4>税抜価格</h4>
+                <div class= "field row">
+                    <%= f.text_field :price %>
+                </div>
+        	<h4>販売ステータス</h4>
+                <div class= "field row">
+                    <%= f.select :status, [["販売中","販売中"],["売切れ","売切れ"]], include_blank: "選択してください" %>
+                </div>
+                <div class= "actions row">
+                    <%= f.submit '新規登録' %>
+                </div>
+        	<% end %>
+        </div>
+    </div>
+</div>

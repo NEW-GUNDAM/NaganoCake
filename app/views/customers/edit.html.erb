@@ -1,2 +1,43 @@
 <h1>Customers#edit</h1>
 <p>Find me in app/views/customers/edit.html.erb</p>
+<div class="container">
+  <h2 class="title">登録情報編集</h2>
+  <div class="row">
+    <div class="col"><%= label :氏名%></div>
+    <div class="col"><%= text_field :last_name %></div>
+    <div class="col"><%= text_field :first_name %></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><%= label :フリガナ %></div>
+    <div class="col"><%= text_field :last_name_kana %></div>
+    <div class="col"><%= text_field :first_name_kana %></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><%= label :郵便番号 %></div>
+    <div class="col"><%= text_field :postal_number %></div>
+    <div class="col"></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><%= label :住所 %></div>
+    <div class="col"><%= text_field :address %></div>
+    <div class="col"></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><%= label :電話番号 %></div>
+    <div class="col"><%= text_field :phone_number %></div>
+    <div class="col"></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><%= label :メールアドレス %></div>
+    <div class="col"><%= text_field :email %></div>
+    <div class="col"></div>
+  </div>
+
+    <%= submit "変更を保存する", class: "btn btn-primary" %>
+    <%= link_to "退会する", customers_usubscribe_path class: "btn btn-danger" %>
+</div>
