@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   # admin側ルーティング
   namespace :admins do
     root "devise#new"
-    get "top" => "home#top", as: 'admins_home'
+    get "top" => "homes#top", as: 'admins_home'
     resources :products, only: [:new, :show, :index, :create, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :order_dateils, only: [:update]
