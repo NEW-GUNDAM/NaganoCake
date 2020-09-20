@@ -4,9 +4,7 @@
 
         <div class = "admins_products_index_main">
         	<h3>商品一覧</h3>
-        	    
-        	    	<%= link_to '', admins_products_new_path, class: "glyphicon glyphicon-plus-sign" %>
-        	    
+        	    <%= link_to " ", new_admins_product_path, class: "glyphicon glyphicon-plus-sign" %>
 	        	<table class = "table">
 	        	    <thead>
 	        	    	<tr>
@@ -18,22 +16,22 @@
 	        	    	</tr>
 	        	    </thead>
 	        	    <tbody>
-	        	    	<%= @products.each do |product| %>
+	        	    	<% @products.each do |product| %>
 	        	    	<tr>
 	        	    		<td>
 	        	    			<%= product.id %>
 	        	    		</td>
 	        	    		<td>
-	        	    			<%= link_to product.name,"admins_products_show(product.id)" %>
+	        	    			<%= link_to product.name, admins_product_path(product.id) %>
 	        	    		</td>
 	        	    		<td>
 	        	    			<%= product.price %>
 	        	    		</td>
 	        	    		<td>
-	        	    			<%= product.genre_status %>
+	        	    			<%= @product.genre.genre_name %>
 	        	    		</td>
 	        	    		<td>
-	        	    			<%= prpduct.status %>
+	        	    			<%= product.status %>
 	        	    		</td>
 
 	        	    	</tr>
