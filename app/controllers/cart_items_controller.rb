@@ -3,7 +3,7 @@ class CartItemsController < ApplicationController
   before_action :set_customer
 
   def index
-    @cart_items = @customer.cart_items.all
+    @cart_items = @customer.cart_items
 
   end
 

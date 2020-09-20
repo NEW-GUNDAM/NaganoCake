@@ -21,20 +21,19 @@
 	            	<td><%= cart.product.price %></td>
 	            	<td>
 	            		<%= form_for(cart, url:cart_item_path(cart)) do |f| %>
+	            		    <%= f.number_field :quantity, value: cart.quantity %>
 		                	<%=link_to "変更", class: "btn btn-primary" %>
 	                	<% end %>
 	            	</td>
-	            	<td><%= link_to "削除する", class: "btn btn-danger"%></td>
+	            	<td><%= link_to "削除する", url:cart_item_path(cart) ,method: :DELETE ,class: "btn btn-danger"%></td>
 	          	</tr>
 	          	<% end %>
 	        </table>
 	        <table class="table table-bordered col-lg-4 float-right">
 	        	<tr class="thead-light">
 	          		<th style="width:50%">合計金額</th>
-	          		<td style="width:50%"><%= total_price %></td>
+	          		<td style="width:50%"></td>
 	        	</tr>
-	        	        <tbody>
-
 	        </table>
 	        <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %><br><br><br>
 	        <div class="text-center">
