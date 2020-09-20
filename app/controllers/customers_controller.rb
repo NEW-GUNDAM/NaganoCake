@@ -1,20 +1,25 @@
 class CustomersController < ApplicationController
   def edit
+    @customer = Customer.find(params[:id])
   end
 
   def update
-    if current_customer.update(customer_params)
+    @customer = Customer.find(params[:id])
+    if @customer.update(customer_params)
       redirect_to customer_path(current_customer.id), notice: "登録情報を編集しました"
     else
-      render :edit
+       flash[:warning] = "入力内容が間違ってるよ"
+       render :edit
     end
   end
 
   def show
+    @customer = Customer.find(params[:id])
 
   end
 
   def withdraw
+   
   end
 
   def unsubscribe

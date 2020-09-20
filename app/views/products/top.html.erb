@@ -42,7 +42,7 @@
 				<h4>オススメ商品</h4>
 				<% @recommendation.each do |product| %>
 				<%= link_to products_path(product.id) %>
-				<%= attachment_image_id product, :image, :size => '200x200' %>
+				<%= attachment_image_tag product, :image, :size => '200x200' %>
 				<p><%= product.name %></p>
 				<p><%= "#{product.price}円"+"+税を別途頂きます" %></p>
 				<!-- 売り切れの場合表示させない -->
