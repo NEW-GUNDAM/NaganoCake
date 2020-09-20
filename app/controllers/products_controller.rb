@@ -1,10 +1,13 @@
 class ProductsController < ApplicationController
   def index
+    @products = Product.all
+    @genres = Genre.all
   end
 
   def show
-  	@genres = Genre.all
-  	@product = Product.find(params[:id])
+    @product = Product.find(params[:id])
+    @genres = Genre.all
+    @cart_item = CartItem.new
   end
 
   def about
@@ -14,4 +17,9 @@ class ProductsController < ApplicationController
   	@genres = Genre.all
   	@recommendation = Product.all.limit(4)
   end
+
+  private
+    def product_params
+      params.require(:product).permit(:genre_id,:name, :introduction,:image, :price, :status)
+    end
 end
