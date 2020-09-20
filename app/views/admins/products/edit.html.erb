@@ -4,16 +4,16 @@
 
         <div class = "admins_products_edit_main">
         	<h3>商品編集</h3>
-        	<%= form_for() do |f| %>
+        	<%= form_for(@product) do |f| %>
         	    <div class="field">
-        	    	<%= f.label :image_id %>
-        	    	<%= f.attachment_field :image_id, class: "image_id" %>
+        	    	<%#= f.label :image_id %>
+        	    	<%#= f.attachment_field :image_id %>
         	    </div>
 
         	    <h5>商品名</h5>
         	        <div class="field">
         	            <%= f.label :name %>
-                        <%= f.text_field :name, class: "name" %>
+                        <%= f.text_field :name %>
                     </div>
         	    <h5>商品説明</h5>
 	        	    <div class="field">
@@ -22,8 +22,8 @@
 	        	    </div>
         	    <h5>ジャンル</h5>
 	        	    <div class="field">
-	        	        <%= f.label :genre_status %>
-	        	        <%= f.select :genre_status %>
+	        	        <%= f.label :genre_id %>
+	        	        <%= f.select :genre_id, Genre.all.map {|genre| [genre.genre_name, genre.id ] } %>
 	        	    </div>
         	    <h5>税抜価格</h5>
 	        	    <div class="field">
@@ -37,7 +37,7 @@
 	        	    </div>
 
 	        	    <div class="actions">
-	        	    	<%= f.submit %>
+	        	    	<%= f.submit "変更を保存",class: "btn btn-primary" %>
 	        	    </div>
         	<% end %>
         </div>

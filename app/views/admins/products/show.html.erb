@@ -4,17 +4,18 @@
 
         <div class = "admins_products_show_main">
         	<h3>商品詳細</h3>
-        	<%= attachment_image_tag 変数, :image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
+        	<%= attachment_image_tag @product, :image_id, :fill, 100, 100 %>
         	<h5>商品名</h5>
         	    <%= @product.name %>
         	<h5>商品説明</h5>
         	    <%= @product.introduction %>
         	<h5>ジャンル</h5>
-        	    <%= @product.genre_status %>
+        	    <%= @product.genre_id %>
         	<h5>税込価格 (税抜価格)</h5>
-        	    <%= @product.price *1.1 %>(<%= @product.price %>) 円
+        	    <%= (@product.price.to_i*1.1).floor %>(<%= @product.price %>) 円
         	<h5>販売ステータス</h5>
         	    <%= @product.status %>
+            <div><%= link_to "編集", edit_admins_product_path, class: "btn btn-primary" %></div>
         </div>
     </div>
 </div>
