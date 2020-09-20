@@ -15,16 +15,19 @@
 	            	<th style="width:15%">小計</th>
 	            	<th style="width:15%"></th>
 	            </tr>
+	            <% @cart_items.each do |cart| %>
 	            <tr>
-	            	<td>商品画像/商品名</td>
-	            	<td>税込単価</td>
-	            	<td class="text-center", style="vertical-align: middle;">
-	                	<%= text_field :count , style: "width:30%"%>
-	                	<%=link_to "変更", class: "btn btn-primary", style: "margin-left:15%" %>
+	            	<td><%= cart.product.name %></td>
+	            	<td><%= cart.product.price %></td>
+	            	<td>
+	            		<%= form_for(cart, url:cart_item_path(cart)) do |f| %>
+	            		    <%= f.number_field :quantity, value: cart.quantity %>
+		                	<%=link_to "変更", class: "btn btn-primary" %>
+	                	<% end %>
 	            	</td>
-	            	<td>小計</td>
-	            	<td><%= link_to "削除する", class: "btn btn-danger"%></td>
+	            	<td><%= link_to "削除する", url:cart_item_path(cart) ,method: :DELETE ,class: "btn btn-danger"%></td>
 	          	</tr>
+	          	<% end %>
 	        </table>
 	        <table class="table table-bordered col-lg-4 float-right">
 	        	<tr class="thead-light">
