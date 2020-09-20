@@ -23,8 +23,11 @@ class CustomersController < ApplicationController
   end
 
   def unsubscribe
-    current_customer.destroy
-    redirect_to root_path, notice: "退会しました"
+    # @customer = Customer.find(current_customer.id)
+    current_customer.update!(is_deleted: true, unsubscribe_ststus: 1)
+
+    reset_session
+    redirect_to root_path
   end
 
   private
