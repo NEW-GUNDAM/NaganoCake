@@ -1,59 +1,32 @@
-<h1>Products#top</h1>
-<p>Find me in app/views/products/top.html.erb</p>
 <div class="container">
-	<div class="row">
+  <div class="row">
+	<div class="col-md-3 genre-form">
+		<%= render 'products/genres-search', genres: @genres %>
+	</div>
 
-		<!-- 部分テンプレート対象！！ -->
-		<div class="col-md-2 genre-form">
-			<div class="genre-list-bar">
-				<table>
-					<thead>
-						<tr>
-							<th>ジャンル検索</th>
-						</tr>
-					</thead>
-					<% @genres.each do |genre| %>
-					<!-- 有効だけを表示させるのでif文必要 -->
-					<tbody>
-						<tr>
-							<td>
-								<%= link_to genre.genre_name, products_path(genre_id: genre.id) %>
-							</td>
-						</tr>
-					<% end %>
-					</tbody>
-				</table>
+	<div class="col-md-9">
+		<div class="row">
+			<div class="main-visual-text" >
+				<p>ようこそ、NaganoCakeへ！</p>
+				<p>このサイトは、ケーキ販売のECサイトになります。</p>
+				<p>会員でない方も商品の閲覧はできますが、</p>
+				<p>購入には会員登録が必要になります。</p>
 			</div>
 		</div>
 
-
-
-		<main class="col-md-10">
-			<div class="row">
-				<div class="main-visual-text" >
-					<p>ようこそ、NaganoCakeへ！</p>
-					<p>このサイトは、ケーキ販売のECサイトになります。</p>
-					<p>会員でない方も商品の閲覧はできますが、</p>
-					<p>購入には会員登録が必要になります。</p>
-				</div>
-			</div>
-
-			<div class="col-md-10">
-				<h4>オススメ商品</h4>
-				<% @recommendation.each do |product| %>
-
-				<%= link_to product_path(product.id) do %>
-				    <%= attachment_image_tag product, :image, :size => '200x200' %>
-					<p><%= product.name %></p>
+		<div class="col-md-9">
+			<h4>オススメ商品</h4>
+			  <% @recommendation.each do |product| %>
+				<div class="col-md-3">
+				<%= link_to product_path(product) do %>
+				<p><%= product.name %></p>
 				<% end %>
-
 				<p><%= "#{product.price}円"+"+税を別途頂きます" %></p>
-				<!-- 売り切れの場合表示させない -->
+		    	</div>
+			  <% end %>
 
-				<% end %>
-
-				<p><%= link_to "もっと見る>>>", products_path %></p>
-			</div>
-		</main>
+			<p><%= link_to "もっと見る>>>", products_path %></p>
+		</div>
+		</div>
 	</div>
 </div>
