@@ -11,96 +11,77 @@
 
 
 
-  <body>
-
- 
-      <header class="header">
-      <% if request.fullpath.include? "admin" %>
-<!-- adminログイン後ヘッダー -->
-
-    <nav>
-        <span>ようこそ！ゆっくり見ていって頂戴</span>
-
-         
-          <ul class="navbar-nav">
+  <body class="header">
+    <header class="navbar navbar-fixed-top">
+      <div class="container">
+      <!-- adminログイン後ヘッダー -->
+      <% if admin_signed_in? %>
+        <nav class="nav navbar-left">
+          <div class="title">
+            <%= link_to "ながのCAKE管理者用", admins_root_path %>
+          </div>
+        </nav>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">
-              <%= link_to "about", products_about_path %>
+              <%= link_to "商品一覧", admins_products_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "会員一覧", admins_customers_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "全顧客_注文履歴一覧", admins_order_items_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ジャンル一覧", admins_genres_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+            </li>
+          </ul>
+        </nav>
+
+      <!-- カスタマーログイン後 -->
+      <% elsif customer_signed_in? %>
+        <nav class="nav navbar-left">
+          <div class="title">
+            <%= link_to "ながのCAKE", root_path %>
+          </div>
+        </nav>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+          <li class="nav-comment">ようこそ！！
+           <%= current_customer.last_name.to_s + " " +current_customer.first_name.to_s %>さん！
+          </li>
+            <li class="nav-item">
+              <%= link_to "マイページ", customer_path(current_customer) %>
             </li>
             <li class="nav-item">
               <%= link_to "商品一覧", products_path %>
             </li>
             <li class="nav-item">
-              <%= link_to "新規登録", new_customer_registration_path %>
+              <%= link_to "カート", cart_items_path %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログイン", new_customer_session_path %>
+              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
             </li>
           </ul>
-
-
-
-          <% if admin_signed_in? %>
-          <%= link_to "ながのCAKE管理者用", admins_root_path %>
-
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <%= link_to "商品一覧", products_path %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "会員一覧", admins_customers_path %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "全顧客_注文履歴一覧", admins_order_items_path %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ジャンル一覧", admins_genres_path %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-              </li>
-            </ul>
-        <% end %>
-    </nav>
-
+        </nav>
 
       <% else %>
 
+         <!-- adminログイン前ヘッダー ＝ カスタマーログイン前 -->
+        <nav class="nav navbar-left">
+          <div class="title">
+            <%= link_to "ながのCAKE", root_path %>
+          </div>
+        </nav>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
 
-    <div>
-        <%= link_to "ながのCAKE", root_path %>
-    </div>
-
-    <nav class="nacbar">
-      <% if customer_signed_in? %>
-      <!-- カスタマーログイン後 -->
-          <span>ようこそ！！
-           <%= current_customer.last_name %>
-           <%= current_customer.first_name %>さん！
-          </span>
-          
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <%= link_to "マイページ", customer_path(current_customer.id) %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "商品一覧", products_path %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "カート", cart_items_path %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-              </li>
-            </ul>
-
-       <% else %>
-
-
- <!-- adminログイン前ヘッダー ＝ カスタマーログイン前 -->
-        <span>ようこそ！ゆっくり見ていって頂戴</span>
-
-         
-          <ul class="navbar-nav">
+            <li class="nav-comment">
+              ようこそ！ゆっくり見ていって頂戴
+            </li>
             <li class="nav-item">
               <%= link_to "about", products_about_path %>
             </li>
@@ -114,12 +95,13 @@
               <%= link_to "ログイン", new_customer_session_path %>
             </li>
           </ul>
+        </nav>
 
       <% end %>
-    </nav>
 
-    <% end %>
-  </header>
+      </div>
+
+    </header>
 
 
 
@@ -129,6 +111,8 @@
     </main>
 
     <!-- フッター -->
-    <footer>©ホワイト企業なGUNDAMチーム</footer>
+    <footer>
+      <p class="text-right">©ホワイト企業なGUNDAMチーム</p>
+    </footer>
   </body>
 </html>

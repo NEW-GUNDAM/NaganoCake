@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
     @genres = Genre.all
+    @products = Product.where(status: "true" )
   end
 
   def show
@@ -14,12 +14,12 @@ class ProductsController < ApplicationController
   end
 
   def top
-  	@genres = Genre.all
-  	@recommendation = Product.all.limit(4)
+    @genres = Genre.all
+    @recommendation = Product.all.limit(4)
   end
 
   private
     def product_params
-      params.require(:product).permit(:genre_id,:name, :introduction,:image, :price, :status)
+      params.require(:product).permit(:genre_id, :name, :introduction, :image_id, :price, :status)
     end
 end
