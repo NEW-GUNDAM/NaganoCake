@@ -2,72 +2,71 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_item = @order.order_items
-    @total_item_price = @order_item.sum{|c| c.order_price * c.quantity }
   end
 
   def new
-    @order = current_customer.orders.new
-    @addresses = Address.where(customer_id: current_customer)
+    @customer = current_customer
+    @order = Order.new
   end
 
   def thanks
   end
 
   def create
-    session[:order] = Order.new
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.save
 
-    session[:send_to_address] = Address.new
-
-    session[:order][:how_to_pay] = params[:order][:how_to_pay].to_i
-
-    if params[:order][:selected_address] == "my address"
-      session[:order][:zipcode] = current_customer.zipcode
-      session[:order][:send_to_address] = current_customer.address
-      session[:order][:addressee] = current_customer.last_name + current_customer.first_name
-    elsif params[:order][:selected_address] == "address"
-      addresses = Address.find(params[:order][:shipping])
-      session[:order][:zipcode] = addresses.zipcode
-      session[:order][:send_to_address] = addresses.address
-      session[:order][:addressee] = addresses.name
-    elsif params[:order][:selected_address] == "new address"
-      session[:order][:zipcode] = params[:order][:zipcode]
-      session[:order][:send_to_address] = params[:order][:send_to_address]
-      session[:order][:addressee] = params[:order][:addressee]
-
-      session[:address][:zipcode] = params[:order][:zipcode]
-      session[:address][:send_to_address] = params[:order][:send_to_address]
-      session[:address][:addressee] = params[:order][:addressee]
-
-      session[:selected_address] = "new address"
+    current_customer.cart_items.each do |cart_item|
+      @order_item = OrderItem.new
+      @order_item.order_id = @order.id
+      @order_item.product_id = cart_item.product_id
+      @order_item.quantity = cart_item.quantity
+      @order_item.order_price = cart_item.product.price
+      @order_item.save
     end
-
-    session[:order][:order_status] = 0
-    cart_items = current_customer.cart_items
-    sum = 0
-    cart_items.each do |cart_item|
-      sum += (cart_item.product.price * cart_item.quantity * 1.1).round
-        end
-          session[:order][:total_price] = sum + 800
-          session[:order][:freight] = 800
-          session[:order][:customer_id] = current_customer.id
-
-    redirect_to orders_comfirm_path
-
+    current_customer.cart_items.destroy_all
+    redirect_to orders_thanks_path
   end
 
   def index
-    @orders = Order.where(customer_id: current_customer.id).order(id: "DESC")
+    @orders = current_customer.orders
   end
 
   def comfirm
-    @cart_items = current_customer.cart_items
-    @total_item_price = @cart_items.sum{|c| c.product.price * c.quantity }
-    @Tax = 1.1
-    @Fee = 800
+    @customer = current_customer
+    @cart_item = current_customer.cart_items
+    @order = Order.new(order_params)
+    # 自身の住所
+    if params[:order][:select_address] == "customer_address"
+      @order.zipcode = @customer.zipcode
+      @order.send_to_address = @customer.address
+      @order.addressee = @customer.last_name + @customer.first_name
+    # 登録済住所
+    elsif params[:order][:select_address] == "deliverey_address"
+      @address = Address.find(params[:select_delivery][:id])
+      @order.zipcode = @address.zipcode
+      @order.send_to_address = @address.address
+      @order.addressee = @address.ship_name
+    # 新しいお届け先
+    elsif params[:order][:select_address] == "new_deliverey_address"
+      @address = Address.new
+      @address.zipcode = params[:order][:new_zipcode]
+      @address.address = params[:order][:new_address]
+      @address.ship_name = params[:order][:new_name]
+      @address.customer_id = current_customer.id
+      if @address.save
+        @order.zipcode = @address.zipcode
+        @order.send_to_address = @address.address
+        @order.addressee = @address.ship_name
+      else
+        render "new"
+      end
+    end
   end
 
   private
-  def orders
+  def order_params
     params.require(:order).permit(:customer_id, :freight, :total_price, :how_to_pay, :zipcode, :send_to_address, :addressee, :order_status)
   end
 
