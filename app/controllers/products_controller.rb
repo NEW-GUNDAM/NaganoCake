@@ -1,12 +1,23 @@
 class ProductsController < ApplicationController
   def index
     @genres = Genre.all
-    @products = Product.where(status: "true" )
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+      @products = @genre.products.where(status: "true").all
+    else
+      @products = Product.where(status: "true" )
+    end
   end
 
   def show
-    @product = Product.find(params[:id])
     @genres = Genre.all
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+      @products = @genre.products.all
+    else
+      @products = Product.where(status: "true" )
+    end
+    @product = Product.find(params[:id])
     @cart_item = CartItem.new
   end
 

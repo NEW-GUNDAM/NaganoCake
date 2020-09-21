@@ -1,21 +1,7 @@
 <div class="container">
   <div class="row">
 	<div class="col-md-3 genre-form">
-	  <table>
-		<thead>
-	      <tr>
-		    <th>ジャンル検索</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  <% @genres.each do |genre| %>
-			<tr>
-			  <td><%= link_to genre.genre_name, products_path(genre_id: genre) %>
-			  </td>
-			</tr>
-		  <% end %>
-		</tbody>
-	  </table>
+	  <%= render 'products/genres-search', genres: @genres %>
 	</div>
 
 	<div class="col-md-9">
