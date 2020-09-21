@@ -24,8 +24,8 @@ class OrdersController < ApplicationController
       session[:order][:zipcode] = current_customer.zipcode
       session[:order][:send_to_address] = current_customer.address
       session[:order][:addressee] = current_customer.last_name + current_customer.first_name
-    elsif params[:order][:selected_address] == "shipping_address"
-      addresses = ShippingAddress.find(params[:order][:shipping])
+    elsif params[:order][:selected_address] == "address"
+      addresses = Address.find(params[:order][:shipping])
       session[:order][:zipcode] = addresses.zipcode
       session[:order][:send_to_address] = addresses.address
       session[:order][:addressee] = addresses.name
@@ -34,9 +34,9 @@ class OrdersController < ApplicationController
       session[:order][:send_to_address] = params[:order][:send_to_address]
       session[:order][:addressee] = params[:order][:addressee]
 
-      session[:shipping_address][:zipcode] = params[:order][:zipcode]
-      session[:shipping_address][:send_to_address] = params[:order][:send_to_address]
-      session[:shipping_address][:addressee] = params[:order][:addressee]
+      session[:address][:zipcode] = params[:order][:zipcode]
+      session[:address][:send_to_address] = params[:order][:send_to_address]
+      session[:address][:addressee] = params[:order][:addressee]
 
       session[:selected_address] = "new address"
     end
@@ -45,13 +45,14 @@ class OrdersController < ApplicationController
     cart_items = current_customer.cart_items
     sum = 0
     cart_items.each do |cart_item|
-      sum += (cart_item.item.price * cart_item.quantity * 1.1).round
+      sum += (cart_item.product.price * cart_item.quantity * 1.1).round
         end
           session[:order][:total_price] = sum + 800
           session[:order][:freight] = 800
           session[:order][:customer_id] = current_customer.id
 
-    redirect_to confirm_new_order_path
+    redirect_to orders_comfirm_path
+
   end
 
   def index
@@ -60,7 +61,7 @@ class OrdersController < ApplicationController
 
   def comfirm
     @cart_items = current_customer.cart_items
-    @total_item_price = @cart_items.sum{|c| c.item.price * c.count }
+    @total_item_price = @cart_items.sum{|c| c.product.price * c.quantity }
     @Tax = 1.1
     @Fee = 800
   end

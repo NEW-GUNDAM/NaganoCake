@@ -10,12 +10,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>data</td>
-				<td>data</td>
-				<td>data</td>
-				<td>data</td>
-			</tr>
+				<% @cart_items.each do |cart_item| %>
+					<tr>
+						<td><%= attachment_image_tag cart_item.product, :image, format: 'jpeg', size: "100x80"%>　<%= cart_item.product.name %></td>
+						<td><%= (cart_item.product.price * @Tax).to_i.to_s(:delimited)  %></td>
+						<td><%= cart_item.quantity %></td>
+						<td><%= ((cart_item.product.price * cart_item.quantity) * 1.1).to_i.to_s(:delimited) %></td>
+					</tr>
+				<% end %>
 		</tbody>
 	</table>
 </div>
@@ -24,17 +26,13 @@
 		<thead>
 			<tr>
 				<th>送料</th>
+				<td><%= @Fee.to_s(:delimited) %>円</td>
 				<th>商品合計</th>
+				<td><%= (@total_item_price * @Tax).to_i.to_s(:delimited) %></td>
 				<th>請求金額</th>
+				<td><%= session[:order]["total_price"].to_i.to_s(:delimited) %></td>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td>800</td>
-				<td>データ</td>
-				<td>データ</td>
-			</tr>
-		</tbody>
 	</table>
 </div>
 
