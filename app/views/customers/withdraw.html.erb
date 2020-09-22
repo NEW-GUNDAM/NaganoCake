@@ -8,7 +8,7 @@
       退会する場合は、「退会する」をクリックしてください。<br>
       </p>
       <%= link_to "退会しない",customer_path(current_customer.id), class: "btn btn-primary" %>
-      <%= link_to "退会する", customers_usubscribe_path(@customer), method: :patch, "data-confirm" => "本当に退会するの？", class: "btn btn-danger" %>
+      <%= link_to "退会する", customers_usubscribe_path, method: :patch, "data-confirm" => "本当に退会するの？", class: "btn btn-danger" %>
     </div>
   </div>
 </div>

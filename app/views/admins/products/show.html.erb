@@ -1,24 +1,27 @@
 <div class = "container">
+  <div class = "row">
+    <div class = "admins_products_show_main">
 
-    <div class = "row">
-
-        <div class = "admins_products_show_main">
-
-        	<h3>商品詳細</h3>
-        	<%= attachment_image_tag @product, :image_id, :fill, 100, 100 %>
-        	<h5>商品名</h5>
-        	    <%= @product.name %>
-        	<h5>商品説明</h5>
-        	    <%= @product.introduction %>
-        	<h5>ジャンル</h5>
-        	    <%= @product.genre.genre_name %>
-        	<h5>税込価格 (税抜価格)</h5>
-        	    <%= (@product.price.to_i*1.1).floor %>(<%= @product.price %>) 円
-        	<h5>販売ステータス</h5>
-        	    <%= @product.status %>
-            <div><%= link_to "編集", edit_admins_product_path, class: "btn btn-primary" %></div>
-
+    <h3>商品詳細</h3>
+    <%= attachment_image_tag @product, :image, format: 'jpeg', size:"100x100" %>
+    <h5>商品名</h5>
+        <%= @product.name %>
+    <h5>商品説明</h5>
+        <%= @product.introduction %>
+    <h5>ジャンル</h5>
+        <%= @product.genre.genre_name %>
+    <h5>税込価格 (税抜価格)</h5>
+        <%= (@product.price.to_i*1.1).floor %>(<%= @product.price %>) 円
+    <h5>販売ステータス</h5>
+        <% if @product.status? %>
+            販売中
+        <% else %>
+            販売中止
+        <% end %>
+        <div>
+          <%= link_to "編集", edit_admins_product_path, class: "btn btn-primary" %>
         </div>
-    </div>
-</div>
 
+    </div>
+  </div>
+</div>

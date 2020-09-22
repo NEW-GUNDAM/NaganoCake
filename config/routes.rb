@@ -21,7 +21,8 @@ Rails.application.routes.draw do
     end
   end
   get "orders/thanks" => "orders#thanks", as: 'orders_thanks'
-  get "orders/comfirm" => "orders#confirm", as: 'orders_comfirm'
+  post 'orders/comfirm' => 'orders#comfirm', as: 'order_comfirm'
+  get "orders/comfirm" => "orders#comfirm", as: 'orders_comfirm'
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   resources :orders, only:[:show, :new, :create, :index]
 
@@ -31,7 +32,7 @@ Rails.application.routes.draw do
     get "top" => "homes#top", as: 'admins_home'
     resources :products, only: [:new, :show, :index, :create, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
-    resources :order_dateils, only: [:update]
+    resources :order_datails, only: [:update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :order_items, only: [:index, :show, :update]
   end
