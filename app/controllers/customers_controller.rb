@@ -19,16 +19,17 @@ class CustomersController < ApplicationController
   end
 
   def withdraw
-   
+
   end
 
-  def unsubscribe
-    # @customer = Customer.find(current_customer.id)
-    current_customer.update!(is_deleted: true, unsubscribe_ststus: 1)
-
-    reset_session
-    redirect_to root_path
+  def usubscribe
+      @customer = Customer.find(current_customer.id)
+      if @customer.update!(customer_status: false)
+         sign_out current_customer
+      end
+      redirect_to root_path
   end
+
 
   private
   def customer_params
