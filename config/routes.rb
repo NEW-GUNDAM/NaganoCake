@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get "top" => "homes#top", as: 'admins_home'
     resources :products, only: [:new, :show, :index, :create, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
-    resources :order_dateils, only: [:update]
+    resources :order_datails, only: [:update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :order_items, only: [:index, :show, :update]
   end
