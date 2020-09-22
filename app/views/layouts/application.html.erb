@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html　lang="en">
   <head>
     <title>NaganoCake</title>
     <%= csrf_meta_tags %>
@@ -7,6 +7,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="style2.css">
   </head>
 
 
@@ -44,7 +46,7 @@
       <!-- カスタマーログイン後 -->
       <% elsif customer_signed_in? %>
         <nav class="nav navbar-left">
-          <div class="title">
+          <div class="title" >
             <%= link_to "ながのCAKE", root_path %>
           </div>
         </nav>
@@ -72,14 +74,14 @@
 
          <!-- adminログイン前ヘッダー ＝ カスタマーログイン前 -->
         <nav class="nav navbar-left">
-          <div class="title">
-            <%= link_to "ながのCAKE", root_path %>
+          <div class="header-logo">
+            <h4><%= link_to "ながのCAKE", root_path %><h4>
           </div>
         </nav>
         <nav>
           <ul class="nav navbar-nav navbar-right">
 
-            <li class="nav-comment">
+            <li class="nav-comment" style=color>
               ようこそ！ゆっくり見ていって頂戴
             </li>
             <li class="nav-item">
@@ -106,7 +108,7 @@
 
 
 
-    <main>
+    <main class="container">
     <%= yield %>
     </main>
 
