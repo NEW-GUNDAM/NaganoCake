@@ -14,6 +14,7 @@
 	  	<td><%= @order.send_to_address %></td>
 	  </tr>
 
+
 	  <tr>
 	  	<th>支払い方法</th>
 	  	<td><%= @order.how_to_pay %></td>
@@ -51,6 +52,7 @@
 		  	<td><%= order_item.product.price * order_item.quantity %></td>
 		  	<td><%= form_for (@order_item), url: admins_order_datail_path, method: :patch do |f| %>
 		  	  <%= f.select :make_status, OrderItem.make_statuses.keys.to_a, selected: order_item.make_status %>
+
 		  	  <%= f.submit "更新" , class: "btn btn-primary" %>
 		  	</td>
 		  	<% end %>
@@ -60,7 +62,6 @@
 	</table>
 
     </div>
-
     <div class="col-xs-4">
   	<table class="table total-price">
   	  <th>商品合計</th>
