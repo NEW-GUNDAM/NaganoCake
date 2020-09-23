@@ -27,7 +27,7 @@
 	  </tr>
 	  <tr>
 	  	<td>郵便番号</td>
-	  	<td><%= @customer.zipcode %></td>
+	  	<td><%= '〒' + @customer.zipcode %></td>
 	  </tr>
 	  <tr>
 	  	<td>住所</td>
@@ -43,6 +43,7 @@
 	  </tr>
 	  <tr>
 	  	<td><%= link_to "編集する", edit_admins_customer_path(@customer), class:"btn btn-primary"  %></td>
+	  	<!-- 注文履歴は該当のユーザーを見る　今はすべてのユーザー -->
 	  	<td><%= link_to "注文履歴一覧を見る", admins_order_items_path, class:"btn btn-primary"  %></td>
 	  </tr>
 	  </table>

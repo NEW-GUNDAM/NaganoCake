@@ -23,6 +23,8 @@
   <div class="actions">
     <%= f.submit "ログイン" %>
   </div>
+  <!-- エラーメッセージはアプリケーションコントローラーに記載していますが、反映されません。たぶんsessionsコントローラーいります -->
+<%= flash[:error] %>
 <% end %>
 <h2>新規登録がお済みでない方</h2>
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
