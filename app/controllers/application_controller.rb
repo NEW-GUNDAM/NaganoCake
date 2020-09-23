@@ -19,10 +19,23 @@ end
 	# ログイン後遷移
   def after_sign_in_path_for(resource)
   	if resource.instance_of?(Admin)
-  		admins_admins_home_path
+  		admins_home_path
   	else
   		root_path
   	end
+  end
+
+# sessions_newカスタマーのエラー文です　反映されていません　たぶんsessionsコントローラーいります。
+   def reject_customer
+    @customer = Customer.find_by(email: params[:customer][:email].downcase)
+    if @customer
+      if (@customer.valid_password?(params[:customer][:password]) && (@customer.active_for_authentication? == true))
+        flash[:error] = "退会済みです。"
+        redirect_to new_customer_session_path
+      end
+    else
+      flash[:error] = "必須項目を入力してください。"
+    end
   end
 
 end
