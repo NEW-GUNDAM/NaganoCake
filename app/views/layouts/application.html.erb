@@ -13,14 +13,14 @@
 
 
 
-  <body class="header">
-    <header class="navbar navbar-fixed-top">
+  <body>
+    <header class="navbar navbar-fixed-top" >
       <div class="container">
       <!-- adminログイン後ヘッダー -->
       <% if admin_signed_in? %>
         <nav class="nav navbar-left">
-          <div class="title">
-            <%= link_to "ながのCAKE管理者用", admins_root_path %>
+          <div class="header-logo">
+            <%= link_to "ながのCAKE管理者用", admins_home_path %>
           </div>
         </nav>
         <nav>
@@ -46,8 +46,8 @@
       <!-- カスタマーログイン後 -->
       <% elsif customer_signed_in? %>
         <nav class="nav navbar-left">
-          <div class="title" >
-            <%= link_to "ながのCAKE", root_path %>
+          <div class="header-logo" >
+            <%= link_to "NaganoCake", root_path %>
           </div>
         </nav>
         <nav>
@@ -75,7 +75,7 @@
          <!-- adminログイン前ヘッダー ＝ カスタマーログイン前 -->
         <nav class="nav navbar-left">
           <div class="header-logo">
-            <h4><%= link_to "ながのCAKE", root_path %><h4>
+            <h4><%= link_to "NaganoCake", root_path %><h4>
           </div>
         </nav>
         <nav>
@@ -110,11 +110,9 @@
 
     <main class="container">
     <%= yield %>
+      <footer>
+        <p class="text-right">©ホワイト企業なGUNDAMチーム</p>
+      </footer>
     </main>
-
-    <!-- フッター -->
-    <footer>
-      <p class="text-right">©ホワイト企業なGUNDAMチーム</p>
-    </footer>
   </body>
 </html>
