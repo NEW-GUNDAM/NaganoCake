@@ -1,4 +1,5 @@
 class Admins::OrderItemsController < ApplicationController
+
   def index
     if params[:customer_id]
       @customer = Customer.find(params[:customer_id])
@@ -16,12 +17,19 @@ class Admins::OrderItemsController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-  	@order.update(order_params)
-  	redirect_to admins_order_item_path(@order)
+    @order_items = @order.order_items
+    @order.update(order_params)
+    if @order.order_status == "入金待ち"
+       @order_items.update_all(make_status: 0)
+    elsif @order.order_status == "入金確認"
+      @order_items.update_all(make_status: 1)
+    end
+    redirect_to admins_order_item_path(@order)
   end
 
   protected
   def order_params
     params.require(:order).permit(:order_status)
   end
+
 end
