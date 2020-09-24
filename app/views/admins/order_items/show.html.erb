@@ -1,80 +1,77 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-offset-2">
-      <div class="col-xs-9">
-		<table class="table order_items-show">
-		  <h4>注文履歴詳細</h4>
-		  <tr>
-		  	<th>購入者</th>
-		  	<td><%= link_to @order.addressee, admins_customer_path(@order.customer) %></td>
-		  </tr>
+<div class="row">
+  <div class="col-xs-offset-1">
+    <div class="col-xs-11">
+	<table class="table order_items-show">
+	  <h4>注文履歴詳細</h4>
+	  <tr>
+	  	<th>購入者</th>
+	  	<td><%= link_to @order.addressee, admins_customer_path(@order.customer) %></td>
+	  </tr>
 
-		  <tr>
-		  	<th>配送先</th>
-		  	<td><%= @order.send_to_address %></td>
-		  </tr>
+	  <tr>
+	  	<th>配送先</th>
+	  	<td>〒<%= @order.zipcode.to_s + " " + @order.send_to_address %></td>
+	  </tr>
 
-		  <tr>
-		  	<th>支払い方法</th>
-		  	<td><%= @order.how_to_pay %></td>
-		  </tr>
+	  <tr>
+	  	<th>支払い方法</th>
+	  	<td><%= @order.how_to_pay %></td>
+	  </tr>
 
+	  <tr>
+	  	<th>注文ステータス</th>
+	  	<td>
+	  	  <%= form_for (@order), url: admins_order_item_path(@order), method: :patch do |f| %><%= f.select :order_status, Order.order_statuses.keys.to_a %>
+	  	  <%= f.submit "更新" , class: "btn btn-primary" %>
+	  	</td>
+	  </tr>
+	  <% end %>
+	</table>
+    </div>
+
+    <div class="col-xs-8">
+
+	<table class="table orders-index">
+	  <thead class="thead-light">
+	  	<th>商品名</th>
+	  	<th>単価（税込）</th>
+	  	<th>数量</th>
+	  	<th>小計</th>
+	  	<th>制作ステータス</th>
+	  	<th></th>
+	  </thead>
+
+	  <tbody>
+	  	<% @order_items.each do |order_item| %>
 		  <tr>
-		  	<th>注文ステータス</th>
-		  	<td>
-		  	  <%= form_for (@order), url: admins_order_item_path, method: :patch do |f| %><%= f.select :order_status, Order.order_statuses.keys.to_a %>
+		  	<td><%= order_item.product.name %></td>
+		  	<td><%= order_item.product.price %></td>
+		  	<td><%= order_item.quantity %></td>
+		  	<td><%= order_item.product.price * order_item.quantity %></td>
+		  	<td><%= form_for (order_item), url: admins_order_datail_path(order_item), method: :patch do |f| %>
+		  	  <%= f.select :make_status, OrderItem.make_statuses.keys.to_a %>
 		  	  <%= f.submit "更新" , class: "btn btn-primary" %>
-		  	</td>
+		  	<% end %></td>
 		  </tr>
-		  <% end %>
-		</table>
-	  </div>
+		<% end %>
+	  </tbody>
+	</table>
 
-	  <div class="col-xs-8">
+    </div>
 
-		<table class="table orders-index">
-		  <thead class="thead-light">
-		  	<th>商品名</th>
-		  	<th>単価（税込）</th>
-		  	<th>数量</th>
-		  	<th>小計</th>
-		  	<th>制作ステータス</th>
-		  	<th></th>
-		  </thead>
-
-		  <tbody>
-		  	<% @order_items.each do |order_item| %>
-			  <tr>
-			  	<td><%= order_item.product.name %> </td>
-			  	<td><%= order_item.product.price %></td>
-			  	<td><%= order_item.quantity %></td>
-			  	<td><%= order_item.product.price * order_item.quantity %></td>
-			  	<td><%= form_for (@order_item), url: admins_order_datail_path, method: :patch do |f| %>
-			  	  <%= f.select :make_status, OrderItem.make_statuses.keys.to_a, selected: order_item.make_status %>
-			  	  <%= f.submit "更新" , class: "btn btn-primary" %>
-			  	</td>
-			  	<% end %>
-			  </tr>
-			<% end %>
-		  </tbody>
-		</table>
-	  </div>
-
-	  <div class="col-xs-4">
-	  	<table class="table total-price">
-	  	  <th>商品合計</th>
-	  	  <td><%= (@order.total_price).to_s(:delimited) %></td>
-	  	</tabale>
-	  	<table class="table freight">
-	  	  <th>送料</th>
-	  	  <td><%= @order.freight %></td>
-	  	</table>
-	  	<table class="table amount-billed">
-	  	  <th>請求金額合計</th>
-	  	  <td><%= ((@order.total_price.to_i * 1.1).floor + @order.freight.to_i).to_s(:delimited) %></td>
-	  	</table>
-	  </div>
-	</div>
-	<div class="col-xs-offset-1"></div>
+    <div class="col-xs-4">
+  	<table class="table total-price">
+  	  <th>商品合計</th>
+  	  <td><%= (@total_price).to_s(:delimited) %>円</td>
+  	</tabale>
+  	<table class="table freight">
+  	  <th>送料</th>
+  	  <td><%= @order.freight %>円</td>
+  	</table>
+  	<table class="table amount-billed">
+  	  <th>請求金額合計</th>
+  	  <td><%= ((@total_price.to_i * 1.1).floor + @order.freight.to_i).to_s(:delimited) %>円</td>
+  	</table>
+    </div>
   </div>
 </div>
