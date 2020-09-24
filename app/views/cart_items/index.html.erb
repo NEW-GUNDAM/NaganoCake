@@ -15,8 +15,12 @@
 	            </tr>
 	            <% @cart_items.each do |cart| %>
 	            <tr>
-	            	<td><%= cart.product.name %></td>
+	            	<td>
+	            		<a><%= cart.product.image %></a>
+	            		<%= cart.product.name %>
+	            	</td>
 	            	<td><%= cart.product.tax_price %>円</td>
+
 	            	<td>
 	            		<%= form_for(cart, url:cart_item_path(cart)) do |f| %>
 	            		    <%= f.number_field :quantity, value: cart.quantity %>

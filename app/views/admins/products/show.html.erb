@@ -1,8 +1,10 @@
+
+
   <div class = "row">
     <div class = "admins_products_show_main">
 
     <h3>商品詳細</h3>
-    <%= attachment_image_tag @product, :image, format: 'jpeg', size:"100x100" %>
+    <%= attachment_image_tag @product, :image, size: "300x300", format: 'jpeg', fallback: "no-data.jpg", size: "300x300" %>
     <h5>商品名</h5>
         <%= @product.name %>
     <h5>商品説明</h5>
@@ -23,3 +25,4 @@
 
     </div>
   </div>
+</div>
