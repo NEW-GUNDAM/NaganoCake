@@ -11,7 +11,6 @@
 		  <th>注文ステータス</th>
 		</thead>
 
-
 		<tbody>
 		<% @orders.each do |order| %>
 		  <tr>
@@ -26,4 +25,7 @@
 		</table>
   </div>
 </div>
-<%= paginate @order_items %>
+</div>
+<%= paginate @orders %>
+
+
