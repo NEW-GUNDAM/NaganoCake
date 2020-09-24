@@ -6,7 +6,7 @@ class Admins::OrderDatailsController < ApplicationController
     if @order_item.make_status == "製作中"
        @order.update(order_status: 2)
     else
-      if OrderItem.where(make_status: 3).count == @order.order_items.count
+      if @order.order_items.where(make_status: 3).count == @order.order_items.count
          @order.update(order_status: 3)
       end
     end
