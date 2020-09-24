@@ -16,6 +16,56 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 li {
   list-style: none;
+}
+main {
+  margin-top: 70px;
+}
+.nav-comment, .title {
+  padding: 15px;
+}
+
+header{
+  text-decoration: none;
+  background-color: #663333;
+  color: #fff;
+  height: 50px;
+}
+
+header .title{
+color: #fff;
+}
+
+.header-logo {
+text-decoration: none;
+  float: left;
+  color: #fff;
+  font-size: 36px;
+}
+
+.top-img {
+  background-image: url(nagano_1.jpg);
+  background-size: cover;
+  height:400px;
+  z-index: 0;
+}
+
+.genre-form{
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size:25px;
+  height:400px;
+  z-index:1;
+}
+
+.main-visual-text{
+ text-align:center;
+ color:#fff;
+ font-size:40px;
 }

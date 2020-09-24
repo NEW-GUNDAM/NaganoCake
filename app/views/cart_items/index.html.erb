@@ -18,13 +18,14 @@
 	            <% @cart_items.each do |cart| %>
 	            <tr>
 	            	<td><%= cart.product.name %></td>
-	            	<td><%= cart.product.price %></td>
+	            	<td><%= cart.product.tax_price%>円</td>
 	            	<td>
 	            		<%= form_for(cart, url:cart_item_path(cart)) do |f| %>
 	            		    <%= f.number_field :quantity, value: cart.quantity %>
 		                	<%= f.submit "変更", class: "btn btn-primary" %>
 	                	<% end %>
 	            	</td>
+	            	<td><%= cart.product.tax_price * cart.quantity%>円</td>
 	            	<td>
 	            		<%= link_to "削除する", cart_item_path(cart) ,method: :delete ,class: "btn btn-danger"%>
 	            	</td>

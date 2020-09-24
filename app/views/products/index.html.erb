@@ -6,7 +6,11 @@
 
 	<div class="col-md-9">
 	  <div class="row">
-	    <h3>商品一覧全<%= @products.count %>件</h3>
+	  	<% if params[:genre_id] %>
+	  		<h3><%= @genre.genre_name %><%= @products.count %>件</h3>
+	  	<% else %>
+	    	<h3>商品一覧全<%= @products.count %>件</h3>
+	    <% end %>
 	  </div>
 	  <% @products.each do |product| %>
 	    <tr>
@@ -17,7 +21,7 @@
 	        <%= product.name %>
 	        <% end %>
 		  </td><br>
-	      <td><%= product.price %></td>
+	      <td><%= product.price %>円(+税)</td>
 		  </div>
 		</tr>
 	  <% end %>
