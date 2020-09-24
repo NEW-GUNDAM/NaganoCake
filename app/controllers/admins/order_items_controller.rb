@@ -1,15 +1,17 @@
 class Admins::OrderItemsController < ApplicationController
   def index
-  	@orders = Order.all
-  	@order_items = OrderItem.page(params[:page]).reverse_order
+    if params[:customer_id]
+      @customer = Customer.find(params[:customer_id])
+      @orders = @customer.orders.page(params[:page]).reverse_order
+    else
+      @orders = Order.page(params[:page]).reverse_order
+    end
   end
 
   def show
-  	@order = Order.find(params[:id])
-    @order_items = OrderItem.all
-    @order_item = OrderItem.new
-  	@order_status = Order.new
-  	@make_status = Order.new
+    @order = Order.find(params[:id])
+    @order_items = @order.order_items
+    @total_price = @order_items.sum{|order_item|order_item.order_price * order_item.quantity }
   end
 
   def update
