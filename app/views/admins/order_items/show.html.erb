@@ -11,11 +11,11 @@
 
 	  <tr>
 	  	<th>配送先</th>
-	  	<td><%= @order.send_to_address %></td>
+	  	<td>〒<%= @order.zipcode.to_s + " " + @order.send_to_address %></td>
 	  </tr>
 
-
 	  <tr>
+
 	  	<th>支払い方法</th>
 	  	<td><%= @order.how_to_pay %></td>
 	  </tr>
@@ -23,7 +23,9 @@
 	  <tr>
 	  	<th>注文ステータス</th>
 	  	<td>
-	  	  <%= form_for (@order), url: admins_order_item_path, method: :patch do |f| %><%= f.select :order_status, Order.order_statuses.keys.to_a %>
+
+	  	  <%= form_for (@order), url: admins_order_item_path(@order), method: :patch do |f| %><%= f.select :order_status, Order.order_statuses.keys.to_a %>
+
 	  	  <%= f.submit "更新" , class: "btn btn-primary" %>
 	  	</td>
 	  </tr>
@@ -46,34 +48,33 @@
 	  <tbody>
 	  	<% @order_items.each do |order_item| %>
 		  <tr>
-		  	<td><%= order_item.product.name %> </td>
+
+		  	<td><%= order_item.product.name %></td>
 		  	<td><%= order_item.product.price %></td>
 		  	<td><%= order_item.quantity %></td>
 		  	<td><%= order_item.product.price * order_item.quantity %></td>
-		  	<td><%= form_for (@order_item), url: admins_order_datail_path, method: :patch do |f| %>
-		  	  <%= f.select :make_status, OrderItem.make_statuses.keys.to_a, selected: order_item.make_status %>
-
+		  	<td><%= form_for (order_item), url: admins_order_datail_path(order_item), method: :patch do |f| %>
+		  	  <%= f.select :make_status, OrderItem.make_statuses.keys.to_a %>
 		  	  <%= f.submit "更新" , class: "btn btn-primary" %>
-		  	</td>
-		  	<% end %>
+		  	<% end %></td>
 		  </tr>
 		<% end %>
 	  </tbody>
 	</table>
-
     </div>
+
     <div class="col-xs-4">
   	<table class="table total-price">
   	  <th>商品合計</th>
-  	  <td><%= (@order.total_price).to_s(:delimited) %></td>
+  	  <td><%= (@total_price).to_s(:delimited) %>円</td>
   	</tabale>
   	<table class="table freight">
   	  <th>送料</th>
-  	  <td><%= @order.freight %></td>
+  	  <td><%= @order.freight %>円</td>
   	</table>
   	<table class="table amount-billed">
   	  <th>請求金額合計</th>
-  	  <td><%= ((@order.total_price.to_i * 1.1).floor + @order.freight.to_i).to_s(:delimited) %></td>
+  	  <td><%= ((@total_price.to_i * 1.1).floor + @order.freight.to_i).to_s(:delimited) %>円</td>
   	</table>
     </div>
   </div>
