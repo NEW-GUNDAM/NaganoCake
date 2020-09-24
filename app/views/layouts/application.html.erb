@@ -96,6 +96,9 @@
             <li class="nav-item">
               <%= link_to "ログイン", new_customer_session_path %>
             </li>
+            <li class="nav-item">
+              <%= link_to " ", new_admin_session_path %>
+            </li>
           </ul>
         </nav>
 
@@ -110,9 +113,9 @@
 
     <main class="container">
     <%= yield %>
-      <footer>
-        <p class="text-right">© 2020 ホワイト企業なGUNDAM.</p>
-      </footer>
     </main>
+    <footer>
+        <p class="text-right">© 2020 ホワイト企業なGUNDAM.</p>
+    </footer>
   </body>
 </html>
