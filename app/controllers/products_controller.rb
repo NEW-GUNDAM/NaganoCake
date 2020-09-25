@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  def index
+   def index
     @genres = Genre.all
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
     @genres = Genre.all
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @products = @genre.products.all
+       @products = @genre.products.where(status: "true" ).all.includes(:genre)
     else
       @products = Product.where(status: "true" )
     end
@@ -31,6 +31,6 @@ class ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit(:genre_id, :name, :introduction, :image_id, :price, :status)
+      params.require(:product).permit(:genre_id, :name, :introduction, :image, :price, :status)
     end
 end
