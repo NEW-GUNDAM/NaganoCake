@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 //　customer product top --------------------------------------------
 
-.top a{
+.products a{
   text-decoration: none;
   text-align:center;
   font-size: 30px;
@@ -17,6 +17,7 @@
  background-image: url(henry-be-_y5CCcYWTjU-unsplash.jpg);
  background-size: cover;
  background-position: center;
+
 }
 
 .top-text-box {
@@ -30,43 +31,46 @@ font-size: 30px;
 border-bottom: dotted 3px #CC9966;
 }
 .genre-form{
-text-decoration: none;
+  text-decoration: none;
   font-family: fantasy;
   color: black;
   font-size:20px;
 }
 
 .main-visual-text{
- font-family: 'Pacifico', cursive;
- text-align:center;
- color :rgba(255, 255, 255, 0.5);
- font-size:90px;
- height:300px;
+  font-family: 'Pacifico', cursive;
+  text-align:center;
+  color :rgba(255, 255, 255, 0.5);
+  font-size:90px;
+  height:300px;
 }
 
+.item-image{
+  border-radius: 20%;
+}
 
 .products-img :after{
-content: "";
-position: absolute;
-z-index: 1;
-width: 70px;
-height: auto;
-background: red;
-content: "New";
-text-align: center;
-color: #fff;
-font-family: 'Arial';
-font-weight: bold;
-padding: 5px 0px;
-left: 30px;
-top: 3px;
-transform: rotate(-30deg);
-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 70px;
+  height: auto;
+  background: red;
+  content: "New";
+  text-align: center;
+  color: #fff;
+  font-family: 'Arial';
+  font-weight: bold;
+  padding: 5px 0px;
+  left: 10px;
+  top: 3px;
+  transform: rotate(-30deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 .readmore{
 text-align:right;
 }
-.price .top {
+.top {
   margin-top:10px;
 }
 
@@ -74,4 +78,7 @@ text-align:right;
 font-family: fantasy;
 color: black;
 font-size:20px;
+margin-top:10px;
+border-bottom: dotted 3px #CC9966;
+text-align:center;
 }

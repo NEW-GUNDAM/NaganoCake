@@ -1,4 +1,5 @@
 class CartItemsController < ApplicationController
+  before_action :authenticate_customer!
   before_action :set_cart_item, only: [:show, :update, :destroy, :edit]
   before_action :set_customer
 

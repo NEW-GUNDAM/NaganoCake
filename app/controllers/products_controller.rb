@@ -1,21 +1,24 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_customer!, except: [:index, :top, :about, :show]
+  
    def index
-    @genres = Genre.all
+    @genres = Genre.where(genre_status: "true" )
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @products = @genre.products.where(status: "true").all
+      @products = @genre.products.all
     else
-      @products = Product.where(status: "true" )
+      @products = Product.all
     end
   end
 
   def show
-    @genres = Genre.all
+    @genres = Genre.where(genre_status: "true" )
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-       @products = @genre.products.where(status: "true" ).all.includes(:genre)
+       @products = @genre.products.all.includes(:genre)
+
     else
-      @products = Product.where(status: "true" )
+      @products = Product.all
     end
     @product = Product.find(params[:id])
     @cart_item = CartItem.new
@@ -25,7 +28,7 @@ class ProductsController < ApplicationController
   end
 
   def top
-    @genres = Genre.all
+    @genres = Genre.where(genre_status: "true" )
     @recommendation = Product.where(status: "true" ).all.limit(4).order(created_at: :desc)
   end
 
