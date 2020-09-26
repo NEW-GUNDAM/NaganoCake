@@ -214,4 +214,4 @@ ja:
       email: メールアドレス
       zipcode: 郵便番号
       address: 住所
-      encrypted_password: パズワード確認
+      encrypted_password: パスワード確認

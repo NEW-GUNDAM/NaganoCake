@@ -2,7 +2,7 @@
 <div class="container">
   <div class="col-xs-offset-1">
     <div class="col-xs-11">
-    <h4>管理者ログイン</h4>
+    <h4>管理者ログイン</h4><br>
 
       <div class="admin-sing_in">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -36,13 +36,9 @@
 
         <div class="actions">
           <%= f.submit "ログイン" %>
-        </div>
+        </div><br>
       <% end %>
-
     </div>
-
-      <%= render "admins/devise/shared/links" %>
-
     </div>
   </div>
 </div>
