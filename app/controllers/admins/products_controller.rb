@@ -9,7 +9,7 @@ class Admins::ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.page(params[:page])
+    @products = Product.page(params[:page]).includes(:genre)
     @genres = Genre.all
   end
 

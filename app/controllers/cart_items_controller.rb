@@ -3,7 +3,7 @@ class CartItemsController < ApplicationController
   before_action :set_customer
 
   def index
-    @cart_items = @customer.cart_items
+    @cart_items = @customer.cart_items.includes(:product)
     @total_price = @cart_items.sum{|cart_item|cart_item.product.price * cart_item.quantity * 1.1}
   end
   def create
@@ -28,6 +28,7 @@ class CartItemsController < ApplicationController
     @cart_item = CartItem.find(params[:id])
     @cart_item.update(cart_item_params)
     @customer = Customer.find(current_customer.id)
+    flash[:notice] = "カート内の商品を更新しました。"
     redirect_to cart_items_path
   end
 
