@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_customer!
+  
   def show
     @order = Order.find(params[:id])
     @order_items = @order.order_items.includes(:product)
@@ -15,7 +17,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    @order.save!
+    if @order.save
 
     current_customer.cart_items.each do |cart_item|
       @order_item = @order.order_items.new
@@ -27,6 +29,9 @@ class OrdersController < ApplicationController
     end
     current_customer.cart_items.destroy_all
     redirect_to orders_thanks_path
+    else
+      flash[:notice] = "商品を選択してください"
+      render :comfirm
   end
 
   def index
