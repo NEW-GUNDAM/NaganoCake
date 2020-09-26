@@ -6,20 +6,29 @@ class CartItemsController < ApplicationController
     @cart_items = @customer.cart_items
     @total_price = @cart_items.sum{|cart_item|cart_item.product.price * cart_item.quantity * 1.1}
   end
-
   def create
+    @customer = current_customer
     @cart_item = @customer.cart_items.new(cart_item_params)
-    @current_item = CartItem.find_by(product_id: @cart_item.product_id, customer_id: @cart_item.customer_id)
-    @cart_item.save
-    flash[:notice] = 'カートに商品が追加されました。'
-    redirect_to cart_items_path
+    @now_cart_item = current_customer.cart_items.find_by(product_id: @cart_item.product_id)
+    if @now_cart_item
+       @now_cart_item.quantity += @cart_item.quantity
+       @now_cart_item.update(quantity: @now_cart_item.quantity)
+       redirect_to cart_items_path
+    else
+      if @cart_item.save
+        redirect_to cart_items_path
+      else
+         flash[:notice] = "カートに入れる個数を入力してください"
+         redirect_back(fallback_location: root_path)
+      end
+    end
   end
 
   def update
-    if @cart_item.update(cart_item_params)
-      flash[:notice] = 'カート内の商品を更新しました。'
-      redirect_to cart_items_path
-    end
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update(cart_item_params)
+    @customer = Customer.find(current_customer.id)
+    redirect_to cart_items_path
   end
 
   def destroy
