@@ -1,32 +1,29 @@
 <div class="row top-img">
-	<div class="col-md-12">
-		<div class="row" >
-			<div class="main-visual-text" >
-				<p>WELCOME NAGANOCAKE</p>
-			</div>
-		</div>
+	<div class="main-visual-text" >
+		<p>WELCOME NAGANOCAKE</p>
 	</div>
 </div>
-<div class="row top" >
-		<div class="top-text-box">
-			<p>このサイトは、ケーキ販売のECサイトになります。会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</p>
-		</div>
-		<h4 class="Menu">PICK UP MENU</h4>
-		<div class="col-md-3 genre-form">
-		    <%= render 'products/genres-search', genres: @genres %>
-	    </div>
-		<% @recommendation.each do |product| %>
+<div class="row products" >
+	<div class="top-text-box">
+		<p>このサイトは、ケーキ販売のECサイトになります。会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</p>
+	</div>
+	<h4 class="Menu">PICK UP MENU</h4>
+	<div class="col-md-2 genre-form">
+	    <%= render 'products/genres-search', genres: @genres %>
+    </div>
+    <div class="col-md-10">
+	    <% @recommendation.each do |product| %>
 		    <div class="col-md-3">
-                <div class="products-img"align="center">
+	            <div class="products-img"align="center">
 					<%= link_to product_path(product) do %>
-						<%= attachment_image_tag product, :image, :fill, 100, 100, fallback: "no-data.jpg", size:"200x200" %>
+						<%= attachment_image_tag product, :image, :fill, 200, 200, fallback: "no-data.jpg", size:"200x200" %>
 						<p class="price top"><%= product.name %></p>
-					<% end %>
-				    <p class="price"><%= "#{product.tax_price}円"%></p>
+				        <p class="price"><%= "#{product.tax_price}円"%></p>
+				    <% end %>
 				</div>
 			</div>
-		<% end %>
-
+	    <% end %>
+    </div>
 </div>
 <div class="row readmore top">
 	<p><%= link_to "Read more▶️", products_path %></p>
