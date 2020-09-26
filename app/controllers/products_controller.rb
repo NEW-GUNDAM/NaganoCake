@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
 
   def top
     @genres = Genre.where(genre_status: "true" )
-    @recommendation = Product.where(status: "true" ).all.limit(4)
+    @recommendation = Product.where(status: "true" ).all.limit(4).order(created_at: :desc)
   end
 
   private
