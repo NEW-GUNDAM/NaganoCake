@@ -14,9 +14,13 @@
 			<h3><%= @product.name %></h3>
 			<p><%= @product.introduction %></p>
 	        <p><%= ((@product.price * 1.1).floor).to_s(:delimited, delimiter: ',') %>円 (税込)</p>
+	        <% if @product.status == false %>
+		       <p>売切れ</p>
+		    <% else %>
 			<%= f.select :quantity, options_for_select((1..10).to_a) , include_blank: "個数選択", selected: 1 %>
             <%= f.hidden_field :product_id, value: @product.id %>
             <%= f.submit "カートに入れる", class: "btn btn-primary"%>
+            <% end %>
 		  <% end %>
         </div>
 	  </div>

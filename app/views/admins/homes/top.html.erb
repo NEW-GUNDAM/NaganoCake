@@ -4,7 +4,11 @@
 	<h4>管理者画面</h4>
 
 	<h3>本日の注文件数 <%= link_to admins_order_items_path do %>
-		  <%= Order.count %> <% end %>
+		  <%= Order.where("created_at >= ?", Date.today).count %><% end %>
+		  件
+	</h3>
+	<h3>未完了の注文件数 <%= link_to admins_order_items_path do %>
+		  <%= Order.where.not(order_status: 4).count %><% end %>
 		件
 	</h3>
 
