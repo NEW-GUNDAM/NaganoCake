@@ -1,7 +1,9 @@
 class Admins::ProductsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def new
     @product = Product.new
-    @genres = Genre.all
+    @genres = Genre.where(genre_status: "true" )
   end
 
   def show
@@ -9,7 +11,7 @@ class Admins::ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    @products = Product.page(params[:page]).includes(:genre)
     @genres = Genre.all
   end
 
@@ -24,7 +26,7 @@ class Admins::ProductsController < ApplicationController
 
   def edit
     @product =Product.find(params[:id])
-    @genres = Genre.all
+    @genres = Genre.where(genre_status: "true" )
   end
 
   def update

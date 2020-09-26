@@ -1,5 +1,6 @@
 class Admins::OrderItemsController < ApplicationController
-
+  before_action :authenticate_admin!
+  
   def index
     if params[:customer_id]
       @customer = Customer.find(params[:customer_id])
@@ -11,7 +12,7 @@ class Admins::OrderItemsController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_items = @order.order_items
+    @order_items = @order.order_items.includes(:product)
     @total_price = @order_items.sum{|order_item|order_item.order_price * order_item.quantity }
   end
 
