@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :customer
   belongs_to :product
 
+
   validates :select_address, acceptance: true
 
   with_options presence: true do

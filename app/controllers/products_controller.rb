@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
        @products = @genre.products.all.includes(:genre)
+
     else
       @products = Product.all
     end

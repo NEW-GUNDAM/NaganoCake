@@ -7,7 +7,6 @@ class CartItemsController < ApplicationController
     @cart_items = @customer.cart_items.includes(:product)
     @total_price = @cart_items.sum{|cart_item|cart_item.product.price * cart_item.quantity * 1.1}
   end
-
   def create
     @customer = current_customer
     @cart_item = @customer.cart_items.new(cart_item_params)
