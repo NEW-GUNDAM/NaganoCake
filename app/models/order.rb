@@ -1,7 +1,8 @@
 class Order < ApplicationRecord
-	has_many :order_items, dependent: :destroy
-	belongs_to :customer
-    belongs_to :product, optional: true
+  has_many :order_items, dependent: :destroy
+  belongs_to :customer
+  belongs_to :product
+
 
   validates :select_address, acceptance: true
 
