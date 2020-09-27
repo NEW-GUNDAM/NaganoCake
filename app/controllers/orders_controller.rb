@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_customer!
-  
+
   def show
     @order = Order.find(params[:id])
     @order_items = @order.order_items.includes(:product)
+    @total_price = @order_items.sum{|order_item|order_item.order_price * order_item.quantity * 1.1 }.floor
   end
 
   def new
@@ -17,30 +18,30 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    if @order.save
-
-    current_customer.cart_items.each do |cart_item|
-      @order_item = @order.order_items.new
-      @order_item.order_id = @order.id
-      @order_item.product_id = cart_item.product_id
-      @order_item.quantity = cart_item.quantity
-      @order_item.order_price = cart_item.product.price
-      @order_item.save
-    end
-    current_customer.cart_items.destroy_all
-    redirect_to orders_thanks_path
+    if @order.save!
+      current_customer.cart_items.each do |cart_item|
+        @order_item = @order.order_items.new
+        @order_item.order_id = @order.id
+        @order_item.product_id = cart_item.product_id
+        @order_item.quantity = cart_item.quantity
+        @order_item.order_price = cart_item.product.price
+        @order_item.save
+      end
+      current_customer.cart_items.destroy_all
+      redirect_to orders_thanks_path
     else
-      flash[:notice] = "商品を選択してください"
+       flash[:notice] = "商品を選択してください"
       render :comfirm
+    end
   end
-
+  
   def index
     @orders = current_customer.orders.includes(order_items: :product)
   end
 
   def comfirm
     @customer = current_customer
-    @cart_item = current_customer.cart_items
+    @cart_items = current_customer.cart_items
     @order = Order.new(order_params)
     # 自身の住所
     if params[:order][:select_address] == "customer_address"

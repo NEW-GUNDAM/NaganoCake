@@ -3,27 +3,40 @@
 	<%= render 'products/genres-search', genres: @genres %>
 	</div>
 	<div class="col-md-10">
-		<div class="row">
-			<% if params[:genre_id] %>
-		        <h3><%= @genre.genre_name %><%= @products.count %>件</h3>
-			<% else %>
-			    <h3>商品一覧全<%= @products.count %>件</h3>
-			<% end %>
-	    </div>
-	 	<% @products.each do |product| %>
-	    	<div class="col-md-3">
+			<div class="row">
+			  	<% if params[:genre_id] %>
+			  		<h3><%= @genre.genre_name %><%= @products.count %>件</h3>
+			  	<% else %>
+			    	<h3>商品一覧全<%= @products.count %>件</h3>
+			    <% end %>
+	    	</div>
+	 		<% @products.each do |product| %>
+
+		    	<div class="col-md-3">
+
 		      	<%= link_to product_path(product) do %>
-			      	<%= attachment_image_tag product, :image, :fill, 200, 200, fallback: "no-data.jpg", size:"200x200" %>
-			        <p class="price"><%= product.name %></p>
-	            <% end %>
-		        <p class="price">
-		            <% if product.status == false %>
-			          売切れ
-			      	<% else %>
-			      	    <%= product.price %>円(+税)
-			        <% end %>
-			    </p>
-		    </div>
-		<% end %>
+		      	<%= attachment_image_tag product, :image, :fill, 200, 200, fallback: "no-data.jpg", size:"200x200" %>
+		        <p class="price"><%= product.name %></p>
+		        <% end %>
+		     <p class="price">
+           <% if product.status == false %>
+	          売切れ
+	      	<% else %>
+	      	  <%= product.price %>円(+税)
+	        <% end %></p>
+		      	</div>
+		  	　　<% end %>
     </div>
 </div>
+
+<div class="row">
+  <div class="col-md-2 genre-form">
+    <%= render 'products/genres-search', genres: @genres %>
+  </div>
+  <div class="col-md-10">
+  	<% if params[:genre_id] %>
+  		<h3><%= @genre.genre_name %>全<%= @products.count %>件</h3>
+  	<% else %>
+    	<h3>商品一覧全<%= @products.count %>件</h3>
+    <% end %>
+  </div>
