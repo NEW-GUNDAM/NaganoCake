@@ -14,7 +14,7 @@
 	            </tr>
 	            <% @cart_items.each do |cart| %>
 	            <tr>
-	            	<td><%= attachment_image_tag cart.product, :image, size: "50x50", format: 'jpeg', fallback: "no-data.jpg", size: "50x50" %>
+	            	<td><%= attachment_image_tag cart.product, :image, size: "50x50", format: 'jpeg', fallback: "no-data.jpg", size: "50x50" , class: "rounded"%>
 	            	<%= cart.product.name %></td>
 	            	<td><%= (cart.product.tax_price).to_s(:delimited) %>円</td>
 
@@ -39,7 +39,7 @@
 	        	</tr>
 	        </table>
 	         <div class="col-md-4 text-center">
-		        <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, class: "pull-right btn btn-danger" %>
+		        <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, class: "pull-right btn btn-danger " %>
 		     </div>
              <div class="col-md-4 text-center">
              	<%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
