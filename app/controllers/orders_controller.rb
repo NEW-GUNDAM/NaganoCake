@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
       flash[:notice] = "商品を選択してください"
       render :comfirm
   end
+  end
 
   def index
     @orders = current_customer.orders.includes(order_items: :product)
