@@ -4,7 +4,7 @@
     <%= form_for (@product), url: admins_product_path(@product), method: :patch do |f| %>
       <%= attachment_image_tag @product, :image, size: "300x300", format: 'jpeg', fallback: "no-data.jpg", size: "300x300" %><br><br>
       <%= f.attachment_field :image %>
-  </div>
+    </div>
 
   <div class="col-md-8 admins products_edit_image_information">
       <h4>商品名</h4>
