@@ -24,6 +24,9 @@
             <li class="nav-item">
               <%= link_to "NAGANOCAKE ADMIN", admins_home_path %>
             </li>
+            <li class="nav-item search">
+              <%= render 'products/search_box_customer.html.erb '%>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">
@@ -50,6 +53,9 @@
           <ul class="nav navbar-nav navbar-left">
             <li class="nav-item">
               <%= link_to "NAGANOCAKE", root_path %>
+            </li>
+            <li class="nav-item search">
+            <%= render 'products/search_box_customer.html.erb '%>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -79,6 +85,9 @@
             <li class="nav-item logo">
               <%= link_to "NAGANOCAKE", root_path %>
             </li>
+            <li class="nav-item search">
+              <%= render 'products/search_box_customer.html.erb'%>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">
@@ -107,9 +116,13 @@
       </div>
 
     </header>
-      <%= flash[:notice] %>
     <main class="container">
-    <%= yield %>
+      <% if flash[:notice] %>
+        <div class="flash">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+        <%= yield %>
     </main>
     <footer>
     <p class="footer-text">© All Rights Reserved By GUNDUM.<i class="fas fa-robot"></i>
