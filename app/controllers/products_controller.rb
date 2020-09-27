@@ -32,6 +32,11 @@ class ProductsController < ApplicationController
     @recommendation = Product.where(status: "true" ).all.limit(4).order(created_at: :desc)
   end
 
+   def search
+    @model = "product"
+    @products = Product.search(params[:search], @model)
+  end
+
   private
     def product_params
       params.require(:product).permit(:genre_id, :name, :introduction, :image, :price, :status)

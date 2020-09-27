@@ -15,17 +15,18 @@
 		    	<div class="col-md-3">
 
 		      	<%= link_to product_path(product) do %>
-		      	<%= attachment_image_tag product, :image, :fill, 200, 200, fallback: "no-data.jpg", size:"200x200" %>
-		        <p class="price"><%= product.name %></p>
-		        <% end %>
-		     <p class="price">
-           <% if product.status == false %>
-	          売切れ
-	      	<% else %>
-	      	  <%= product.price %>円(+税)
-	        <% end %></p>
-		      	</div>
-		  	　　<% end %>
+			      	<%= attachment_image_tag product, :image, :fill, 200, 200, fallback: "no-data.jpg", size:"200x200", class: "img-thumbnail" %>
+			        <p class="price"><%= product.name.truncate(12, omission: '...') %></p>
+	            <% end %>
+		        <p class="price">
+		            <% if product.status == false %>
+			          売切れ
+			      	<% else %>
+			      	    <%= product.price %>円(+税)
+			        <% end %>
+			    </p>
+		    </div>
+		<% end %>
     </div>
 </div>
 
