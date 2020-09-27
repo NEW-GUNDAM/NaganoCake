@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_customer!, except: [:index, :top, :about, :show]
+  before_action :authenticate_customer!, except: [:index, :top, :about, :show, :search]
   
    def index
     @genres = Genre.where(genre_status: "true" )
@@ -16,7 +16,6 @@ class ProductsController < ApplicationController
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
        @products = @genre.products.all.includes(:genre)
-
     else
       @products = Product.all
     end
@@ -30,6 +29,11 @@ class ProductsController < ApplicationController
   def top
     @genres = Genre.where(genre_status: "true" )
     @recommendation = Product.where(status: "true" ).all.limit(4).order(created_at: :desc)
+  end
+
+   def search
+    @model = "product"
+    @products = Product.search(params[:search], @model)
   end
 
   private

@@ -13,7 +13,7 @@ class Admins::OrderItemsController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_items = @order.order_items.includes(:product)
-    @total_price = @order_items.sum{|order_item|order_item.order_price * order_item.quantity }
+    @total_price = @order_items.sum{|order_item|order_item.order_price * 1.1 * order_item.quantity }.floor
   end
 
   def update

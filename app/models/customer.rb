@@ -24,4 +24,12 @@ class Customer < ApplicationRecord
     super && (self.customer_status == true)
   end
 
+  def self.search(search, model)
+    if model == "customer"
+      Customer.where('first_name_kana LIKE ? OR last_name_kana LIKE ? OR first_name LIKE ? OR last_name LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
+    else
+      Customer.all
+    end
+  end
+
 end

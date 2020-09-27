@@ -22,6 +22,19 @@
   box-sizing: border-box;
 }
 
+.btn {
+  margin-left: 10px;
+  margin-top : 10px;
+}
+
+.img{
+　border-radius:100px;
+　border:5px solid #F90;
+　width:200px;
+　overflow:hidden;
+　box-shadow:0 0 4px #666666;
+}
+
 // header　--------------------------------------------
 
 main {
@@ -59,6 +72,10 @@ navbar-nav{
 
 .nav-item{
 vertical-align: middle;
+}
+
+.search {
+  margin-top:14px;
 }
 
 
