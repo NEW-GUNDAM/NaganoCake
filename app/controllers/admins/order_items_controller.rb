@@ -5,6 +5,8 @@ class Admins::OrderItemsController < ApplicationController
     if params[:customer_id]
       @customer = Customer.find(params[:customer_id])
       @orders = @customer.orders.page(params[:page]).reverse_order
+    elsif params[:created_at]
+      @orders = Order.where("DATE(created_at) = '#{Date.current}'").page(params[:page]).reverse_order
     else
       @orders = Order.page(params[:page]).reverse_order
     end
