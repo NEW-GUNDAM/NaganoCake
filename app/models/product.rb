@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :genre
   has_many :order_items, dependent: :destroy
+  has_many :orders
   has_many :cart_items
   attachment :image
 
@@ -17,6 +18,14 @@ class Product < ApplicationRecord
 
     def tax_price
       tax_price = price * TAX
-      tax_price.round
+      tax_price.floor
     end
+
+  def self.search(search, model)
+    if model == "product"
+      Product.where(['name LIKE ?', "%#{search}%"])
+    else
+      Product.all
+    end
+  end
 end
