@@ -13,13 +13,26 @@
   line-height: 30px;
   letter-spacing: 1.5px;
 }
-.top-img {
- background-image: url(henry-be-_y5CCcYWTjU-unsplash.jpg);
- background-size: cover;
- background-position: center;
-
+#container{
+  height: 400px;
 }
 
+.image1 {
+ background-image: url(deva-williamson-S2jw81lfrG0-unsplash.jpg);
+}
+.image2 {
+ background-image: url(henry-be-_y5CCcYWTjU-unsplash.jpg);
+}
+.image3 {
+ background-image: url(julie-johnson-OLoq19jOd9g-unsplash.jpg);
+}
+.image4 {
+ background-image: url(mike-meeks-zk-fclJdGas-unsplash.jpg);
+}
+.image5 {
+ background-image: url(macaroons-2178371_1920.jpg);
+
+}
 .top-text-box {
 text-align:center;
 color: #18528f;
@@ -42,7 +55,7 @@ border-bottom: dotted 3px #CC9966;
   text-align:center;
   color :rgba(255, 255, 255, 0.5);
   font-size:90px;
-  height:300px;
+
 }
 
 .item-image{
