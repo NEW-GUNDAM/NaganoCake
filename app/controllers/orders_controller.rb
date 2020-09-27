@@ -34,6 +34,7 @@ class OrdersController < ApplicationController
       render :comfirm
     end
   end
+
   def index
     @orders = current_customer.orders.includes(order_items: :product)
   end
