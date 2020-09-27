@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     else
       flash[:notice] = "商品を選択してください"
       render :comfirm
-  end
+    end
   end
 
   def index

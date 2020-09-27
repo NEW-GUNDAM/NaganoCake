@@ -6,7 +6,7 @@ class Product < ApplicationRecord
 
   with_options presence: true do
     validates :genre_id
-    validates :name, length: {minimum: 1}
+    validates :name, length: {maximum: 20, minimum: 1}
     validates :introduction
     validates :price
   end
