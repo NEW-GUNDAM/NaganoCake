@@ -1,55 +1,43 @@
-class Admins::ProductsController < ApplicationController
-  before_action :authenticate_admin!
+class ProductsController < ApplicationController
+  before_action :authenticate_customer!, except: [:index, :top, :about, :show, :search]
   
-  def new
-    @product = Product.new
+   def index
     @genres = Genre.where(genre_status: "true" )
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+      @products = @genre.products.all
+    else
+      @products = Product.all
+    end
   end
 
   def show
-    @product = Product.find(params[:id])
-  end
-
-  def index
-    @products = Product.page(params[:page]).includes(:genre)
-    @genres = Genre.all
-  end
-
-  def create
-    @product = Product.new(product_params)
-    if @product.save
-      redirect_to admins_product_path(@product)
-    else
-      render :new
-    end
-  end
-
-  def edit
-    @product =Product.find(params[:id])
     @genres = Genre.where(genre_status: "true" )
-  end
-
-  def update
-    @product =Product.find(params[:id])
-    if @product.update(product_params)
-      redirect_to admins_products_path
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+       @products = @genre.products.all.includes(:genre)
     else
-      render :edit
+      @products = Product.all
     end
+    @product = Product.find(params[:id])
+    @cart_item = CartItem.new
   end
 
-  def search
-    @model = params[:model]
-    if @model == "customer"
-      @customers = Customer.search(params[:search], @model)
-    else
-      @products = Product.search(params[:search], @model).includes(:genre)
+  def about
+  end
+
+  def top
+    @genres = Genre.where(genre_status: "true" )
+    @recommendation = Product.where(status: "true" ).all.limit(4).order(created_at: :desc)
+  end
+
+   def search
+    @model = "product"
+    @products = Product.search(params[:search], @model)
+  end
+
+  private
+    def product_params
+      params.require(:product).permit(:genre_id, :name, :introduction, :image, :price, :status)
     end
-  end
-
-  protected
-
-  def product_params
-    params.require(:product).permit(:name, :introduction, :image, :price, :status, :genre_id, :genre_name)
-  end
 end
