@@ -1,33 +1,8 @@
-<div class = "row">
-<h3>商品詳細</h3>
-
-  <div class="col-md-4 admins_product_show_image">
-    <%= attachment_image_tag @product, :image, size: "300x300", format: 'jpeg', fallback: "no-data.jpg", size: "300x300" %>
-  </div>
-
-  <div class="col-md-8 admins_product_show_information">
-
-    <h5>商品名</h5>
-      <%= @product.name %>
-    <h5>商品説明</h5>
-      <%= @product.introduction %>
-    <h5>ジャンル</h5>
-      <%= @product.genre.genre_name %>
-    <h5>税込価格 (税抜価格)</h5>
-      <%= @product.tax_price.to_s(:delimited) %>(<%= (@product.price).to_s(:delimited) %>) 円
-    <h5>販売ステータス</h5>
-      <% if @product.status? %>
-        販売中
-      <% else %>
-        売切れ
-      <% end %>
-    <div>
-      <%= link_to "編集", edit_admins_product_path, class: "btn btn-primary" %>
+<div class="row products">
+	<h4 class="Menu">MENU</h4>
+	<div class="col-md-2 genre-form">
+	    <%= render 'products/genres-search', genres: @genres %>
     </div>
-
-  </div>
-
-</div>
 	<div class="col-md-10">
 	  <div class="row">
 		<div class="col-md-4 item-image" >
@@ -38,7 +13,7 @@
 		  <%= form_for(@cart_item , url: cart_items_path(product_id: @product), method: :post) do |f| %>
 			<h3 class="price name"><%= @product.name %></h3>
 			<p class="price"><%= @product.introduction %></p>
-	        <p class="price"><%= ((@product.price * 1.1).floor).to_s(:delimited, delimiter: ',') %>円 (税込)</p>
+	        <p class="price"><%= @product.tax_price.to_s(:delimited, delimiter: ',') %>円 (税込)</p>
       <% if @product.status == false %>
 		       <p>売切れ</p>
 		  <% else %>
