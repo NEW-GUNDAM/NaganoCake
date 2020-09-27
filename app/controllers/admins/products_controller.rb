@@ -38,6 +38,15 @@ class Admins::ProductsController < ApplicationController
     end
   end
 
+  def search
+    @model = params[:model]
+    if @model == "customer"
+      @customers = Customer.search(params[:search], @model)
+    else
+      @products = Product.search(params[:search], @model).includes(:genre)
+    end
+  end
+
   protected
 
   def product_params

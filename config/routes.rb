@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get "orders/comfirm" => "orders#comfirm", as: 'orders_comfirm'
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   resources :orders, only:[:show, :new, :create, :index]
-
+  get "products/search" => "products#search", as:"customers_search"
   # admin側ルーティング
   namespace :admins do
     root "devise#new"
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :order_datails, only: [:update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :order_items, only: [:index, :show, :update]
+    get "products/search" => "products#search", as:"search"
   end
    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
