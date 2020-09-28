@@ -8,7 +8,7 @@ class Order < ApplicationRecord
 
   with_options presence: true do
     validates :addressee, length: {maximum: 20, minimum: 2}
-    validates :zipcode, format: {with: /\A\d{7}\z/}
+    validates :zipcode, format: {with: /\A\d{7}\z/}, numericality: true
     validates :send_to_address
     validates :freight
     validates :total_price
