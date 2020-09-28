@@ -1,21 +1,21 @@
 class Admins::OrderItemsController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
     if params[:customer_id]
       @customer = Customer.find(params[:customer_id])
-      @orders = @customer.orders.page(params[:page]).reverse_order
+      @orders = @customer.orders.quantity_total.page(params[:page]).reverse_order
     elsif params[:created_at]
       @orders = Order.where("DATE(created_at) = '#{Date.current}'").page(params[:page]).reverse_order
     else
-      @orders = Order.page(params[:page]).reverse_order
+      @orders = Order.quantity_total.page(params[:page]).reverse_order
     end
   end
 
   def show
     @order = Order.find(params[:id])
     @order_items = @order.order_items.includes(:product)
-    @total_price = @order_items.sum{|order_item|order_item.order_price * 1.1 * order_item.quantity }.floor
+    @total_price = @order_items.sum{|order_item|(order_item.order_price * 1.1).floor * order_item.quantity }
   end
 
   def update
