@@ -1,6 +1,7 @@
 <div class = "row admins products_new_main">
 <h3 class="product_new">商品新規登録</h3>
   <%= form_for (@product), url: admins_products_path, method: :post do |f| %>
+     <%= render 'layouts/error_messages', model: f.object %>
     <div class ="col-md-4 product_image">
       <%= attachment_image_tag @product, :image, size: "300x300", format: 'jpeg', fallback: "no-data.jpg", size: "300x300" %>
       <%= f.attachment_field :image %>

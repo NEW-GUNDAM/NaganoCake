@@ -4,6 +4,7 @@
 	<h4>ジャンル一覧・追加</h4>
 
 	<%= form_for (@genre), url: admins_genres_path do |f| %>
+	  <%= render 'layouts/error_messages', model: f.object %>
 	  <%= f.label :ジャンル %>
       <%= f.text_field :genre_name, :placeholder => "ジャンル名", autofocus: true, autocomplete: "genre_name" %>
       <%= f.radio_button :genre_status, :true %>
