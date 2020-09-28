@@ -4,6 +4,7 @@
     <h4>ジャンル編集</h4>
 
     <%= form_for (@genre), url: admins_genre_path(@genre) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
       <%= f.label :ジャンル %>
       <%= f.text_field :genre_name %>
       <%= f.radio_button :genre_status, :true %>
