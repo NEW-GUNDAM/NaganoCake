@@ -5,14 +5,14 @@ class CartItemsController < ApplicationController
 
   def index
     @cart_items = @customer.cart_items.includes(:product)
-    @total_price = @cart_items.sum{|cart_item|cart_item.product.price * 1.1 * cart_item.quantity}.floor
+    @total_price = @cart_items.sum{|cart_item|(cart_item.product.price * 1.1) * cart_item.quantity}.floor
   end
 
   def create
     @customer = current_customer
     @cart_item = @customer.cart_items.new(cart_item_params)
     @now_cart_item = current_customer.cart_items.find_by(product_id: @cart_item.product_id)
-    if @now_cart_item
+    if @now_cart_item && @cart_item.quantity.to_i >= 1
        @now_cart_item.quantity += @cart_item.quantity
        @now_cart_item.update(quantity: @now_cart_item.quantity)
        redirect_to cart_items_path
