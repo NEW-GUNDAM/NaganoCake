@@ -67,7 +67,7 @@ header a{
 }
 
 navbar-nav{
-  height:70px;
+  height:50px;
 }
 
 .nav-item{
@@ -93,5 +93,50 @@ footer {
 .price{
  font-size: 20px;
 }
+// レスポンシブ---------------------------------------
+@media screen and (max-width:1200px){
 
+main {
+  margin-top: 140px;
+}
 
+.nav-comment {
+  padding: 15px;
+  color:#18528f;
+}
+
+header li {
+  list-style: none;
+}
+
+header{
+  text-decoration: none;
+  background-color: rgba(99, 194, 191, 1);
+  height: 100px;
+  font-family: Oswald,sans-serif;
+  font-weight: 700;
+}
+
+header a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: 1.5px;
+}
+
+navbar-nav{
+  height:100px;
+}
+
+.nav-item{
+vertical-align: middle;
+}
+
+.search {
+  margin-top:14px;
+}
+.img-thumbnail{
+  margin: 0 auto;
+}
+}
