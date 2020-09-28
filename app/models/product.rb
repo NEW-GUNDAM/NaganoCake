@@ -9,7 +9,7 @@ class Product < ApplicationRecord
     validates :genre_id
     validates :name, length: {maximum: 20, minimum: 1}
     validates :introduction
-    validates :price
+    validates :price, numericality: true
   end
 
   validates :status, inclusion: { in: [true, false] }

@@ -47,17 +47,17 @@
 				<div class="radio-button-text">
 					<div class="field">
 						<%= f.label :new_postal_code, "郵便番号（ハイフンなし）" %>
-						<%= f.text_field :new_zipcode, autofocus: true %>
+						<%= f.text_field :new_zipcode, autofocus: true, :placeholder => "半角数字,ハイフンなし" %>
 					</div>
 
 					<div class="field">
 						<%= f.label :new_address, "住所　　　　　　　　　　" %>
-						<%= f.text_field :new_address, autofocus: true %>
+						<%= f.text_field :new_address, autofocus: true, :placeholder => "東京都千代田区永田町1丁目7-1", :size=>"40x10" %>
 					</div>
 
 					<div class="field">
 						<%= f.label :new_name, "宛名　　　　　　　　　　" %>
-						<%= f.text_field :new_name, autofocus: true %>
+						<%= f.text_field :new_name, autofocus: true, :placeholder => "山田太郎" %>
 					</div>
 				</div>
 			</div>

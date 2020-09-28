@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
       @genre = Genre.find(params[:genre_id])
       @products = @genre.products.all
     else
-      @products = Product.all
+      @products = Product.joins(:genre).where("genres.genre_status = ?", true )
     end
   end
 
@@ -15,9 +15,9 @@ class ProductsController < ApplicationController
     @genres = Genre.where(genre_status: "true" )
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-       @products = @genre.products.all.includes(:genre)
+      @products = @genre.products.all.includes(:genre)
     else
-      @products = Product.all
+      @products = Product.joins(:genre).where("genres.genre_status = ?", true )
     end
     @product = Product.find(params[:id])
     @cart_item = CartItem.new
@@ -28,12 +28,12 @@ class ProductsController < ApplicationController
 
   def top
     @genres = Genre.where(genre_status: "true" )
-    @recommendation = Product.where(status: "true" ).all.limit(4).order(created_at: :desc)
+    @recommendation = Product.where(status: "true" ).joins(:genre).where("genres.genre_status = ?", true ).limit(4).order(created_at: :desc)
   end
 
    def search
     @model = "product"
-    @products = Product.search(params[:search], @model)
+    @products = Product.joins(:genre).where("genres.genre_status = ?", true ).search(params[:search], @model)
   end
 
   private

@@ -11,8 +11,13 @@ class Admins::ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.page(params[:page]).includes(:genre)
     @genres = Genre.all
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+      @products = @genre.products.page(params[:page])
+    else
+      @products = Product.page(params[:page])
+    end
   end
 
   def create
