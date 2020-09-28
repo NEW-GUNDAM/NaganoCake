@@ -5,7 +5,7 @@ class CartItemsController < ApplicationController
 
   def index
     @cart_items = @customer.cart_items.includes(:product)
-    @total_price = @cart_items.sum{|cart_item|cart_item.product.price * 1.1 * cart_item.quantity}
+    @total_price = @cart_items.sum{|cart_item|cart_item.product.price * 1.1 * cart_item.quantity}.floor
   end
 
   def create
