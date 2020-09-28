@@ -93,8 +93,33 @@ footer {
 .price{
  font-size: 20px;
 }
+// error-------------------------------------------
+.alert{
+    color:#262626;
+    background:#FFEBE8;
+    text-align: center;
+    border:2px solid #990000;
+    padding:12px; font-weight:850;}
+.error{
+    color:#262626;
+    background:#FFEBE8;
+    text-align: center;
+    border:2px solid #990000;
+    padding:12px; font-weight:850;}
+
+.notice {
+    color:#262626;
+    background:#ffebe800;
+    text-align: center;
+    border: 2px solid #2196F3;
+    padding:12px; font-weight:850;
+  }
+  .error li{
+  list-style:none;
+  }
 // レスポンシブ---------------------------------------
 @media screen and (max-width:1200px){
+
 
 main {
   margin-top: 140px;
@@ -104,7 +129,6 @@ main {
   padding: 15px;
   color:#18528f;
 }
-
 header li {
   list-style: none;
 }
