@@ -5,9 +5,9 @@
 	<div class="col-md-10">
 			<div class="row">
 			  	<% if params[:genre_id] %>
-			  		<h3><%= @genre.genre_name %><%= @products.count %>件</h3>
+			  		<h4 class="Menu"><%= @genre.genre_name %><%= @products.count %>件</h4>
 			  	<% else %>
-			    	<h3>商品一覧全<%= @products.count %>件</h3>
+			    	<h4 class="Menu">MENU全<%= @products.count %>件</h4>
 			    <% end %>
 	    	</div>
 	 		<% @products.each do |product| %>

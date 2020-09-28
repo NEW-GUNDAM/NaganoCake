@@ -1,5 +1,5 @@
 <div class = "row admins products_edit_main">
-  <h3>商品編集</h3>
+  <h4 class="Menu">商品編集</h4>
   <%= form_for (@product), url: admins_product_path(@product), method: :patch do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
     <div class = "col-md-4 admins products_edit_image">
