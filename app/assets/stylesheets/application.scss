@@ -161,7 +161,8 @@ vertical-align: middle;
 .search {
   margin-top:14px;
 }
-.img-thumbnail{
+.img-thumbnail, #cart_item_quantity, .product-submit {
   margin: 0 auto;
+  display: block;
 }
 }
