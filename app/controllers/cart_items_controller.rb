@@ -20,7 +20,7 @@ class CartItemsController < ApplicationController
       if @cart_item.save
         redirect_to cart_items_path
       else
-         flash[:notice] = "カートに入れる個数を入力してください"
+         flash[:alert] = "カートに入れる個数を入力してください"
          redirect_back(fallback_location: root_path)
       end
     end

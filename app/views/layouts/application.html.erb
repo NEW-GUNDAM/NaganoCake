@@ -78,7 +78,6 @@
         </nav>
 
       <% else %>
-
          <!-- adminログイン前ヘッダー ＝ カスタマーログイン前 -->
        <nav>
           <ul class="nav navbar-nav navbar-left">
@@ -110,11 +109,8 @@
             </li>
           </ul>
         </nav>
-
       <% end %>
-
       </div>
-
     </header>
     <main class="container">
     <% if flash[:notice] %>
@@ -123,7 +119,7 @@
       </div>
     <% end %>
     <% if flash[:alert] %>
-      <div class="notification is-danger">
+      <div class="notification is-info">
         <p class="alert"><%= alert %></p>
       </div>
     <% end %>
