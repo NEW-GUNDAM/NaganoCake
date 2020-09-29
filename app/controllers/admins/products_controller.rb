@@ -16,7 +16,7 @@ class Admins::ProductsController < ApplicationController
       @genre = Genre.find(params[:genre_id])
       @products = @genre.products.page(params[:page])
     else
-      @products = Product.page(params[:page])
+      @products = Product.page(params[:page]).includes(:genre)
     end
   end
 
