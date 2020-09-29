@@ -11,13 +11,19 @@ class Admins::ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.page(params[:page]).includes(:genre)
     @genres = Genre.all
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+      @products = @genre.products.page(params[:page])
+    else
+      @products = Product.page(params[:page])
+    end
   end
 
   def create
     @product = Product.new(product_params)
     if @product.save
+      flash[:notice] = "商品を登録しました。"
       redirect_to admins_product_path(@product)
     else
       render :new
@@ -33,6 +39,7 @@ class Admins::ProductsController < ApplicationController
     @product =Product.find(params[:id])
     if @product.update(product_params)
       redirect_to admins_products_path
+      flash[:notice] = "商品を更新しました。"
     else
       render :edit
     end
