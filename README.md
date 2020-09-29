@@ -57,10 +57,6 @@ Customer { email: testtest@test / password: 'aaaaaa' }<br>
 上記で、どちらの会員種別でもログインしていただけます。<br>
 新規顧客登録はお試しでどなたでも追加いただけます。<br>
 
-<br>
-![TOP画面](app/assets/images/2020-09-29.12.52.２８.png)
-- - - -
-<br>
 
 ### 作者（チーム名）
 ホワイト企業　GUNDUMチーム
